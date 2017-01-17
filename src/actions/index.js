@@ -9,19 +9,21 @@ export const VisibilityFilters ={
   SHOW_ACTIVE: 'SHOW_ACTIVE'
 }
 
- let nextTodoId = 0
-export function addTodo(text){
+ let nextTodoId = 0;
+export function addTodo(text,description){
   return {
     type: ADD_TODO,
     id: nextTodoId++,
-    text
+    text,
+    description
   }
 }
 
-export function toggleTodo(index){
+export function toggleTodo(id){
+  console.log('about to do a toogle with ID: ',id);
   return {
     type: TOGGLE_TODO,
-    index
+    id
   }
 }
 
