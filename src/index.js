@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { Router, Route, browserHistory } from 'react-router';
+import { router } from './store'
 import './index.css';
 
+
+
+
 ReactDOM.render(
-  <App />,
+  router,
   document.getElementById('root')
 );
