@@ -1,37 +1,50 @@
 /* eslint-disable */
 import { call, put, takeEvery, takeLatest,select, take, fork } from 'redux-saga/effects';
 
+import { apiGetAllTodos, apiCreateTodo } from '../services/TodosApi';
 
-export  function* watchAndLog() {
-  yield takeEvery('*', function* logger(action) {
-    const state = yield select()
-    console.log('action', action)
-    console.log('state after', state)
-  })
+
+
+//GET_TODOS
+function* getTodos(feathersApp){
+  try {
+    const data = yield call(apiGetAllTodos,feathersApp)
+    console.log('this is the data ',data);
+    yield put({type:"GET_TODOS_SUCCEEDED",data});
+  } catch (error) {
+    console.log('this is the error ',error);
+     yield put({type:'GET_TODOS_FAILED',error})
+  } 
 }
-
-
-export function* getTodosSaga(action){
+function* getTodosSaga(feathersApp){
+  yield takeEvery('GET_TODOS',getTodos,feathersApp);
 }
-// export function* getTodos(action){
-//   try {
-//     const request = yield call(/*MISING APICALLFUNTION AND PARAMETERS FOR IT COMMING FROM THE SAME ARGUMENTS IN THE FUN*/);
-//     yield put({type:"GET_TODOS_SUCCEEDED",request})
-//   } catch (error) {
-//     yield put({type: "GET_TODOS_FAILED",error})
-//   } 
-// }
-
+//CREATE_TODO
+function* createTodo(feathersApp,action){
+  const { todo, description } = action
+  try {
+    const resp = yield call(apiCreateTodo,feathersApp, todo, description)
+    console.log('this is the resp ',resp);
+    yield put({type:"CREATE_TODO_SUCCEEDED",resp});
+  } catch (error) {
+    console.log('this is the error ',error);
+     yield put({type:'CREATE_TODO_FAILED',error})
+  } 
+}
+function* createTodoSaga(feathersApp){
+  yield takeLatest('CREATE_TODO',createTodo,feathersApp);
+}
 
 export default function* rootSaga(feathersApp){
-  yield [
-       fork(getTodosSaga, feathersApp),
-       fork(watchAndLog),
+  yield[
+      fork(getTodosSaga, feathersApp),
+      fork(createTodoSaga, feathersApp),
   ]
-  // yield takeEvery('GET_TODOS',getTodos);
-  // yield takeEvery('GET_TODOS',createTodo);
 }
 
+// export default function* rootSaga(feathersApp) {
+//   yield takeLatest('GET_TODOS', getTodos, feathersApp);
+// }
 
 /**
  * call also supports invoking object methods, 
