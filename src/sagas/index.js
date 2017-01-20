@@ -1,7 +1,9 @@
 /* eslint-disable */
 import { call, put, takeEvery, takeLatest,select, take, fork } from 'redux-saga/effects';
 
-import { apiGetAllTodos, apiCreateTodo } from '../services/TodosApi';
+import { 
+	apiGetAllTodos, apiCreateTodo, 
+	apiUpdateTodo, apiDeleteTodo } from '../services/TodosApi';
 
 
 
@@ -19,26 +21,42 @@ function* getTodos(feathersApp){
 function* getTodosSaga(feathersApp){
   yield takeEvery('GET_TODOS',getTodos,feathersApp);
 }
-//CREATE_TODO
-function* createTodo(feathersApp,action){
-  const { todo, description } = action
+//UPDATE_TODO
+function* updateTodo(feathersApp,action){
+  const { idTodo, ...args } = action
   try {
-    const resp = yield call(apiCreateTodo,feathersApp, todo, description)
+    const resp = yield call(apiUpdateTodo,feathersApp, idTodo,...args)
     console.log('this is the resp ',resp);
-    yield put({type:"CREATE_TODO_SUCCEEDED",resp});
+    yield put({type:"UPDATE_TODO_SUCCEEDED",resp});
   } catch (error) {
     console.log('this is the error ',error);
-     yield put({type:'CREATE_TODO_FAILED',error})
+     yield put({type:'UPDATE_TODO_FAILED',error})
   } 
 }
-function* createTodoSaga(feathersApp){
-  yield takeLatest('CREATE_TODO',createTodo,feathersApp);
+function* updateTodoSaga(feathersApp){
+  yield takeLatest('UPDATE_TODO',updateTodo,feathersApp);
+}
+//DELETE_TODO
+function* deleteTodo(feathersApp,idTodo){
+  try {
+    const resp = yield call(apiDeleteTodo,feathersApp, idTodo)
+    console.log('this is the resp ',resp);
+    yield put({type:"DELETE_TODO_SUCCEEDED",resp});
+  } catch (error) {
+    console.log('this is the error ',error);
+     yield put({type:'DELETE_TODO_FAILED',error})
+  } 
+}
+function* deleteTodoSaga(feathersApp){
+  yield takeLatest('DELETE_TODO',deleteTodo,feathersApp);
 }
 
 export default function* rootSaga(feathersApp){
   yield[
       fork(getTodosSaga, feathersApp),
       fork(createTodoSaga, feathersApp),
+      fork(updateTodoSaga, feathersApp),
+      fork(deleteTodoSaga, feathersApp),
   ]
 }
 

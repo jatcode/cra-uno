@@ -24,3 +24,28 @@ export function apiCreateTodo(feathersApp,todo, description){
       return err;
     })
 }  
+
+export function apiDeleteTodo(feathersApp,idTodo){
+  const todoService = feathersApp.service('todos');
+  return todoService.remove(idTodo)
+    .then((value) => {
+      console.log('data en DELETE API',value);
+      return value;
+    })
+    .catch((err) => {
+      console.log('error en DELETE api',err);
+      return err;
+    })
+}  
+export function apiUpdateTodo(feathersApp,idTodo,...params){
+  const todoService = feathersApp.service('todos');
+  return todoService.update({idTodo, params})
+    .then((value) => {
+      console.log('data en UPDATE API',value);
+      return value;
+    })
+    .catch((err) => {
+      console.log('error en UPDATE api',err);
+      return err;
+    })
+}  
