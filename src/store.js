@@ -16,18 +16,12 @@ import mainSaga from './sagas/index';
 import sagaMonitor from './sagas/sagaMonitor/index';
 
 const sagaMiddleware = createSagaMiddleware({sagaMonitor});
-
 const storeEnhancer = applyMiddleware(sagaMiddleware);
-// let store = createStore(rootReducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-let store = createStore(
-  rootReducer,
-  // ,initialStateForStore
-  compose(
-    storeEnhancer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
-);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+let store = createStore( rootReducer /*,initialStateForStore*/, composeEnhancers(storeEnhancer));
+
 /*Feathers conf*/
 const serverHost ='http://10.190.8.190:3030';
 // const serverHost = 'http://10.190.8.190:3030';

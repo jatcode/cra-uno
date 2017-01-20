@@ -6,12 +6,10 @@ import {
 	apiUpdateTodo, apiDeleteTodo } from '../services/TodosApi';
 
 
-
 //GET_TODOS
 function* getTodos(feathersApp){
   try {
     const data = yield call(apiGetAllTodos,feathersApp)
-    console.log('this is the data ',data);
     yield put({type:"GET_TODOS_SUCCEEDED",data});
   } catch (error) {
     console.log('this is the error ',error);
@@ -20,6 +18,21 @@ function* getTodos(feathersApp){
 }
 function* getTodosSaga(feathersApp){
   yield takeEvery('GET_TODOS',getTodos,feathersApp);
+}
+//CREATE_TODO
+function* createTodo(feathersApp,action){
+  const { todo, description } = action
+  try {
+    const resp = yield call(apiCreateTodo,feathersApp, todo, description)
+    console.log('this is the resp ',resp);
+    yield put({type:"CREATE_TODO_SUCCEEDED",resp});
+  } catch (error) {
+    console.log('this is the error ',error);
+     yield put({type:'CREATE_TODO_FAILED',error})
+  } 
+}
+function* createTodoSaga(feathersApp){
+  yield takeLatest('CREATE_TODO',createTodo,feathersApp);
 }
 //UPDATE_TODO
 function* updateTodo(feathersApp,action){
@@ -37,13 +50,22 @@ function* updateTodoSaga(feathersApp){
   yield takeLatest('UPDATE_TODO',updateTodo,feathersApp);
 }
 //DELETE_TODO
-function* deleteTodo(feathersApp,idTodo){
+function* deleteTodo(feathersApp,{idTodo}){
   try {
-    const resp = yield call(apiDeleteTodo,feathersApp, idTodo)
-    console.log('this is the resp ',resp);
-    yield put({type:"DELETE_TODO_SUCCEEDED",resp});
+		// const {errors, name, response, ...resto} = yield call(apiDeleteTodo,feathersApp, idTodo)
+		const {response: error, error:message, ...resto} = yield call(apiDeleteTodo,feathersApp, idTodo)
+		// const resp = yield call(apiDeleteTodo,feathersApp, idTodo)
+		console.log('resto: ',resto);
+		console.log('resp: ',response);
+		console.log('error: ',error);
+		console.log('error message: ',message);
+		if(error){
+			 yield put({type:'DELETE_TODO_FAILED',error}) 
+		} else{
+			yield put({type:"DELETE_TODO_SUCCEEDED",resp});
+		}
   } catch (error) {
-    console.log('this is the error ',error);
+    console.log('something else happened on delete: ',error);
      yield put({type:'DELETE_TODO_FAILED',error})
   } 
 }
@@ -60,10 +82,6 @@ export default function* rootSaga(feathersApp){
   ]
 }
 
-// export default function* rootSaga(feathersApp) {
-//   yield takeLatest('GET_TODOS', getTodos, feathersApp);
-// }
-
 /**
  * call also supports invoking object methods, 
  * you can provide a this context to the invoked functions using the following form:
@@ -71,6 +89,7 @@ export default function* rootSaga(feathersApp){
 yield call([obj, obj.method], arg1, arg2, ...) // as if we did obj.method(arg1, arg2 ...)
 
 apply is an alias for the method invocation form
+
 yield apply(obj, obj.method, [arg1, arg2, ...])
 call and apply are well suited for functions that return Promise results.
 

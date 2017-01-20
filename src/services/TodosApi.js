@@ -25,12 +25,12 @@ export function apiCreateTodo(feathersApp,todo, description){
     })
 }  
 
-export function apiDeleteTodo(feathersApp,idTodo){
+export function apiDeleteTodo(feathersApp,idTodo){  
   const todoService = feathersApp.service('todos');
   return todoService.remove(idTodo)
-    .then((value) => {
-      console.log('data en DELETE API',value);
-      return value;
+    .then((resp) => {
+      console.log('data en DELETE API',resp);
+      return resp;
     })
     .catch((err) => {
       console.log('error en DELETE api',err);
