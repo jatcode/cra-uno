@@ -26,6 +26,7 @@ function* createTodo(feathersApp,action){
     const resp = yield call(apiCreateTodo,feathersApp, todo, description)
     console.log('this is the resp ',resp);
     yield put({type:"CREATE_TODO_SUCCEEDED",resp});
+		yield put({type:"GET_TODOS"});
   } catch (error) {
     console.log('this is the error ',error);
      yield put({type:'CREATE_TODO_FAILED',error})
@@ -36,13 +37,23 @@ function* createTodoSaga(feathersApp){
 }
 //UPDATE_TODO
 function* updateTodo(feathersApp,action){
-  const { idTodo, ...args } = action
+  const { idTodo, todo, description } = action
   try {
-    const resp = yield call(apiUpdateTodo,feathersApp, idTodo,...args)
-    console.log('this is the resp ',resp);
-    yield put({type:"UPDATE_TODO_SUCCEEDED",resp});
+    const {code, ...data } = yield call(apiUpdateTodo,feathersApp, idTodo,todo, description)
+		if(code){
+			console.log('codigo,,, ',code);
+			var {response:{error, statusText}} = data;
+			console.log('response: ',data);
+			console.log('statusTEXT: ',statusText);
+			console.log('response.ERROR.NAME: ',error.name);
+			console.log('response.ERROR.MESSAGE: ',error.message);
+		}else{
+			console.log('this is the resp ',data);
+			yield put({type:"UPDATE_TODO_SUCCEEDED",data});
+			yield put({type:"GET_TODOS"});
+		}
   } catch (error) {
-    console.log('this is the error ',error);
+    console.log('Something else happened on update ',error);
      yield put({type:'UPDATE_TODO_FAILED',error})
   } 
 }
@@ -52,17 +63,19 @@ function* updateTodoSaga(feathersApp){
 //DELETE_TODO
 function* deleteTodo(feathersApp,{idTodo}){
   try {
-		// const {errors, name, response, ...resto} = yield call(apiDeleteTodo,feathersApp, idTodo)
-		const {response: error, error:message, ...resto} = yield call(apiDeleteTodo,feathersApp, idTodo)
-		// const resp = yield call(apiDeleteTodo,feathersApp, idTodo)
-		console.log('resto: ',resto);
-		console.log('resp: ',response);
-		console.log('error: ',error);
-		console.log('error message: ',message);
-		if(error){
-			 yield put({type:'DELETE_TODO_FAILED',error}) 
+		const {code, ...data } = yield call(apiDeleteTodo,feathersApp, idTodo)
+		if(code){
+			console.log('codigo,,, ',code);
+			var {response:{error, statusText}} = data;
+			console.log('response: ',data);
+			console.log('statusTEXT: ',statusText);
+			console.log('response.ERROR.NAME: ',error.name);
+			console.log('response.ERROR.MESSAGE: ',error.message);
+			yield put({type:'DELETE_TODO_FAILED',error}) 
 		} else{
-			yield put({type:"DELETE_TODO_SUCCEEDED",resp});
+			console.log('data: ',data);
+			yield put({type:"DELETE_TODO_SUCCEEDED",data});
+			yield put({type:"GET_TODOS"});
 		}
   } catch (error) {
     console.log('something else happened on delete: ',error);

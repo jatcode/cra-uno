@@ -29,17 +29,15 @@ export function apiDeleteTodo(feathersApp,idTodo){
   const todoService = feathersApp.service('todos');
   return todoService.remove(idTodo)
     .then((resp) => {
-      console.log('data en DELETE API',resp);
       return resp;
     })
     .catch((err) => {
-      console.log('error en DELETE api',err);
       return err;
     })
 }  
-export function apiUpdateTodo(feathersApp,idTodo,...params){
+export function apiUpdateTodo(feathersApp,idTodo,todo, description){
   const todoService = feathersApp.service('todos');
-  return todoService.update({idTodo, params})
+  return todoService.update(idTodo, {todo, description})
     .then((value) => {
       console.log('data en UPDATE API',value);
       return value;
