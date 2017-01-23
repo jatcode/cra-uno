@@ -16,7 +16,7 @@ function* getTodos(feathersApp){
      yield put({type:'GET_TODOS_FAILED',error})
   } 
 }
-function* getTodosSaga(feathersApp){
+function* getTodosSaga(feathersApp,action){
   yield takeEvery('GET_TODOS',getTodos,feathersApp);
 }
 //CREATE_TODO
