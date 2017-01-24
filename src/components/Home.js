@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Divider } from 'semantic-ui-react'
+import Lista from './todos/Lista';
 
-// import AddTodo from '../containers/AddTodo';
-import TodoListContainer from '../containers/Todos/TodoListContainer';
-// import Footer from './Footer';
-
-
-
-const Home = ()=>(
-	<div>
-		<TodoListContainer />
-	</div>
-)
-
+class Home extends Component {
+  render() {
+    return (
+      <div>
+        <Divider />
+				<Lista {...this.props}/>
+      </div>
+    );
+  }
+}
 
 export default Home;

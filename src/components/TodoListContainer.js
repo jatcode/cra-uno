@@ -1,14 +1,14 @@
 import React , { Component } from 'react';
 import { connect } from 'react-redux';
-// import TodoList from '../../components/todos/TodoList';
+import TodoList from '../../components/todos/TodoList';
 import { bindActionCreators } from 'redux'
 // import { getAllTodos, createTodo, updateTodo, deleteTodo } from './actions';
-// import  * as actionCreators  from './actions';
+import  * as actionCreators  from './actions';
 import Lista from '../../components/todos/Lista';
 class TodoListContainer extends Component {
 	
 componentDidMount(){
-	// this.props.dispatch(actionCreators.getAllTodos());
+	this.props.dispatch(actionCreators.getAllTodos());
 	//  console.log('was here didmount',this.props);//nothgin here
 }
 

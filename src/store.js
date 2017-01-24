@@ -11,7 +11,8 @@ import feathers from 'feathers-client';
 import rest from 'feathers-rest/client';
 
 import rootReducer from './reducers/index'
-import App from './components/App';
+import App from './containers/App';
+import Home from './components/Home';
 import mainSaga from './sagas/index';
 import sagaMonitor from './sagas/sagaMonitor/index';
 
@@ -41,6 +42,7 @@ export const router =(
   <Provider store={store}>
     <Router history={history}>
       <Route path='/' component={App}>
+				<IndexRoute component={Home}/>
       </Route>
     </Router>
   </Provider>
