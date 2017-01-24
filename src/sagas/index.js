@@ -1,9 +1,8 @@
-/* eslint-disable */
-import { call, put, takeEvery, takeLatest,select, take, fork } from 'redux-saga/effects';
-
+import { call, put, takeEvery, takeLatest/*,select, take*/, fork } from 'redux-saga/effects';
+import { browserHistory } from 'react-router';
 import { 
-	apiGetAllTodos, apiCreateTodo, 
-	apiUpdateTodo, apiDeleteTodo } from '../services/TodosApi';
+	apiGetAllTodos, apiCreateTodo, apiUpdateTodo, 
+	apiDeleteTodo, apiGetSingleTodo } from '../services/TodosApi';
 
 
 //GET_TODOS
@@ -21,11 +20,12 @@ function* getTodosSaga(feathersApp,action){
 }
 //CREATE_TODO
 function* createTodo(feathersApp,action){
-  const { todo, description } = action
+  const { values:{todo, description} } = action
   try {
     const resp = yield call(apiCreateTodo,feathersApp, todo, description)
     // console.log('this is the resp ',resp);
     yield put({type:"CREATE_TODO_SUCCEEDED",resp});
+		yield browserHistory.push(`/`);
 		yield put({type:"GET_TODOS"});
   } catch (error) {
     console.log('this is the error ',error);
@@ -37,7 +37,7 @@ function* createTodoSaga(feathersApp){
 }
 //UPDATE_TODO
 function* updateTodo(feathersApp,action){
-  const { idTodo, todo, description } = action
+  const { payload:{idTodo, todo, description} } = action
   try {
     const {code, ...data } = yield call(apiUpdateTodo,feathersApp, idTodo,todo, description)
 		if(code){
@@ -50,6 +50,7 @@ function* updateTodo(feathersApp,action){
 		}else{
 			// console.log('this is the resp ',data);
 			yield put({type:"UPDATE_TODO_SUCCEEDED",data});
+			yield browserHistory.push(`/`);
 			yield put({type:"GET_TODOS"});
 		}
   } catch (error) {
@@ -73,8 +74,9 @@ function* deleteTodo(feathersApp,{idTodo}){
 			console.log('response.ERROR.MESSAGE: ',error.message);
 			yield put({type:'DELETE_TODO_FAILED',error}) 
 		} else{
-			// console.log('data: ',data);
+			console.log('data: ',data);
 			yield put({type:"DELETE_TODO_SUCCEEDED",data});
+			yield browserHistory.push(`/`);
 			yield put({type:"GET_TODOS"});
 		}
   } catch (error) {
@@ -85,13 +87,30 @@ function* deleteTodo(feathersApp,{idTodo}){
 function* deleteTodoSaga(feathersApp){
   yield takeLatest('DELETE_TODO',deleteTodo,feathersApp);
 }
+function* callGetSingleTodo(feathersApp, {idTodo}) {
+  const singleTodoItem = yield call(apiGetSingleTodo, feathersApp, idTodo);
+  yield put({type: "GET_SINGLE_TODO_SUCCEEDED", singleTodoItem});
+}
+
+function* getSingleTodoSaga(feathersApp) {
+  yield takeEvery("GET_SINGLE_TODO", callGetSingleTodo, feathersApp);
+}
+function* callLoadForm(feathersApp, {idTodo}) {
+  const singleTodoItem = yield call(apiGetSingleTodo, feathersApp, idTodo);
+  yield put({type: "LOAD_FORM_SUCCEEDED", singleTodoItem});
+}
+function* loadFormSaga(feathersApp) {
+	yield takeEvery("LOAD_FORM", callLoadForm, feathersApp);
+}
 
 export default function* rootSaga(feathersApp){
   yield[
       fork(getTodosSaga, feathersApp),
+      fork(getSingleTodoSaga, feathersApp),
+      fork(loadFormSaga, feathersApp),
+			fork(deleteTodoSaga, feathersApp),
       fork(createTodoSaga, feathersApp),
       fork(updateTodoSaga, feathersApp),
-      fork(deleteTodoSaga, feathersApp),
   ]
 }
 

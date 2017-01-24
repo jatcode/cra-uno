@@ -6,7 +6,8 @@ import Main from '../components/Main';
 
 function mapStateToProps(state){
     return {
-			mytodos: state.mytodos
+			mytodos: state.mytodos,
+      currTodo: state.currTodo, 
 		};
 }
 

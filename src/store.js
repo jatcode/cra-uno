@@ -11,10 +11,9 @@ import feathers from 'feathers-client';
 import rest from 'feathers-rest/client';
 
 import rootReducer from './reducers/index'
-import App from './containers/App';
-import Home from './components/Home';
 import mainSaga from './sagas/index';
 import sagaMonitor from './sagas/sagaMonitor/index';
+import routes from './routes';
 
 const sagaMiddleware = createSagaMiddleware({sagaMonitor});
 const storeEnhancer = applyMiddleware(sagaMiddleware);
@@ -33,17 +32,11 @@ const feathersApp =
   
 sagaMiddleware.run(mainSaga,feathersApp);
 
-// const action = type => store.dispatch({type:'GET_TODOS'});
-
-// console.log('action Store ',action);
 const history = syncHistoryWithStore(browserHistory,store);
 
 export const router =(
   <Provider store={store}>
-    <Router history={history}>
-      <Route path='/' component={App}>
-				<IndexRoute component={Home}/>
-      </Route>
+    <Router history={history} routes={routes}>
     </Router>
   </Provider>
 )
