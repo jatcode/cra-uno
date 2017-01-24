@@ -39,7 +39,7 @@ export function apiUpdateTodo(feathersApp,idTodo,todo, description){
   const todoService = feathersApp.service('todos');
   return todoService.update(idTodo, {todo, description})
     .then((value) => {
-      console.log('data en UPDATE API',value);
+      // console.log('data en UPDATE API',value);
       return value;
     })
     .catch((err) => {

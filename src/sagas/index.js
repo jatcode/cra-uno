@@ -24,7 +24,7 @@ function* createTodo(feathersApp,action){
   const { todo, description } = action
   try {
     const resp = yield call(apiCreateTodo,feathersApp, todo, description)
-    console.log('this is the resp ',resp);
+    // console.log('this is the resp ',resp);
     yield put({type:"CREATE_TODO_SUCCEEDED",resp});
 		yield put({type:"GET_TODOS"});
   } catch (error) {
@@ -41,14 +41,14 @@ function* updateTodo(feathersApp,action){
   try {
     const {code, ...data } = yield call(apiUpdateTodo,feathersApp, idTodo,todo, description)
 		if(code){
-			console.log('codigo,,, ',code);
+			// console.log('codigo,,, ',code);
 			var {response:{error, statusText}} = data;
 			console.log('response: ',data);
 			console.log('statusTEXT: ',statusText);
 			console.log('response.ERROR.NAME: ',error.name);
 			console.log('response.ERROR.MESSAGE: ',error.message);
 		}else{
-			console.log('this is the resp ',data);
+			// console.log('this is the resp ',data);
 			yield put({type:"UPDATE_TODO_SUCCEEDED",data});
 			yield put({type:"GET_TODOS"});
 		}
@@ -65,7 +65,7 @@ function* deleteTodo(feathersApp,{idTodo}){
   try {
 		const {code, ...data } = yield call(apiDeleteTodo,feathersApp, idTodo)
 		if(code){
-			console.log('codigo,,, ',code);
+			// console.log('codigo,,, ',code);
 			var {response:{error, statusText}} = data;
 			console.log('response: ',data);
 			console.log('statusTEXT: ',statusText);
@@ -73,7 +73,7 @@ function* deleteTodo(feathersApp,{idTodo}){
 			console.log('response.ERROR.MESSAGE: ',error.message);
 			yield put({type:'DELETE_TODO_FAILED',error}) 
 		} else{
-			console.log('data: ',data);
+			// console.log('data: ',data);
 			yield put({type:"DELETE_TODO_SUCCEEDED",data});
 			yield put({type:"GET_TODOS"});
 		}

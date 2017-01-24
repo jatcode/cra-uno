@@ -1,23 +1,20 @@
 import React, { PropTypes } from 'react';
-//import { Item } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react'
+import { browserHistory, Link } from 'react-router';
 
-const Todo = ({onClick, text, description, completed })=>(
-	<li 
-		onClick={onClick}
-		style={{ 
-			textDecoration: 
-				completed ? 'line-through':'none' 
-		}}
-	>
-	<span> {	text } </span>
-	<span> {	description } </span>
-	</li>
+const TodoItem = ({_id, todo, description },idTodo)=>(
+	<Card
+    centered   
+		key={idTodo}
+    header={todo}
+    meta='Description'
+    description={`${description.substring(0, 100)}...`}
+    onClick={() => browserHistory.push(`/view/${_id}`)}
+  />
 )
-Todo.propTypes ={
-	onClick: PropTypes.func.isRequired,
-	completed: PropTypes.bool.isRequired,
-	text: PropTypes.string.isRequired,
+TodoItem.propTypes ={
+	todo: PropTypes.string.isRequired,
 	description: PropTypes.string,
 }
 
-export default Todo;
+export default TodoItem;
