@@ -6,7 +6,7 @@ import { startCase, toLower } from 'lodash/string'
 
 export const MyLink = ({toValue, label}) =>
   <div className='ui compact menu'>
-    <Link to={toValue} className='link item'>
+    <Link to={ toValue } className='link item'>
       {label}
     </Link>
   </div>
