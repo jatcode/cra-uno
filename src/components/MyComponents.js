@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Message } from 'semantic-ui-react';
 import { Field } from 'redux-form'
@@ -58,3 +58,32 @@ export const MyForm = (props) => {
     </form>
   )
 }
+const MyGrid= (fcolumn,scolumn,tcolumn,...props)=>
+<div className="pure-g">
+    <div className="pure-u-1-3"><p>{fcolumn}</p></div>
+    <div className="pure-u-1-3"><p>{scolumn}</p></div>
+    <div className="pure-u-1-3"><p>{tcolumn}</p></div>
+		{props.children}
+</div>
+
+MyGrid.propTypes={
+	fcolumn: PropTypes.string.isRequired,
+	scolumn: PropTypes.string.isRequired,
+	tcolumn: PropTypes.string.isRequired,
+}
+export {MyGrid};
+
+export const SingleListItem= ({firstName,lastName, email, picture, options})=>
+  <div>
+		 <dl>
+			 <dt>{firstName}</dt>
+			 <dt>{lastName}</dt>
+			 <dt>{email}</dt>
+			 <dt>{picture}</dt>
+			 <dt>{options}</dt>
+			 <dd>{options.geoLocation}</dd>
+       <dd>{options.geoLocation.latitude}</dd>
+       <dd>{options.geoLocation.longitude}</dd>
+			 <dd>{options.racis}</dd>
+		 </dl>
+  </div>

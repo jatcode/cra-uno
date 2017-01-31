@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
-import { Grid, Card } from 'semantic-ui-react'
-// import { /*, Link*/ } from 'react-router';
-import { Button, Cell } from 'react-pure';
+// import { Grid, Card } from 'semantic-ui-react'
+// import { Button, Cell } from 'react-pure';
+import { MyGrid } from '../MyComponents'
 
 const TodoItem = ({id, username, job },idTodo)=>(
-    <Grid.Row>
-      <Grid.Column width={3}>{id}</Grid.Column>
-      <Grid.Column width={3}>{username}</Grid.Column>
-      <Grid.Column width={3}>{job}</Grid.Column>
-    </Grid.Row>
+	<div className="pure-g" key={idTodo} >
+    <div className="pure-u-1-3 pure-u-md-1-2 pure-u-lg-1-4"><p>{id}</p></div>
+    <div className="pure-u-1-3 pure-u-md-1-2 pure-u-lg-1-4"><p>{username}</p></div>
+    <div className="pure-u-1-3 pure-u-md-1-2 pure-u-lg-1-4"><p>{job}</p></div>
+	</div>
 )
 TodoItem.propTypes ={
 	todo: PropTypes.string.isRequired,

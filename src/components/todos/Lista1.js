@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import { Grid,Card } from 'semantic-ui-react';
 import TodoItem from './TodoItem';
 import PedroItem from './PedroItem';
+import { MyGrid } from '../MyComponents';
 
 export default class Lista extends Component {
 	componentDidMount() {		
@@ -52,16 +53,15 @@ export default class Lista extends Component {
 		// console.log('props before render LISTA', this.props)
     // {/* {mytodos.map((todo, i) => TodoItem(todo, i))} */}
 		// let { mytodos } = this.props
-      
       return (
-        <Grid celled>
-          <Grid.Row>
-            <Grid.Column width={3}>{'ID'}</Grid.Column>
-            <Grid.Column width={3}>{'USERNAME'}</Grid.Column>
-            <Grid.Column width={3}>{'JOB'}</Grid.Column>
-          </Grid.Row>
-          {this.json.map((item, i) => PedroItem(item, i))}
-        </Grid>
+				<div>
+					<div className="pure-g">
+				    <div className="pure-u-1-3 pure-u-md-1-2 pure-u-lg-1-4"><p>ID</p></div>
+				    <div className="pure-u-1-3 pure-u-md-1-2 pure-u-lg-1-4"><p>USERNAME</p></div>
+				    <div className="pure-u-1-3 pure-u-md-1-2 pure-u-lg-1-4"><p>JOB</p></div>
+					</div>
+					{this.json.map((item, i) => PedroItem(item, i))}
+				</div>
       );
   }
 }
