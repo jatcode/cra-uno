@@ -9,7 +9,7 @@ import { SingleListItem } from '../MyComponents';
 class Lista extends Component {
 	
 	render(){
-		console.log(data);
+		// console.log(data);
 		return(
 			<div>
 				{data.data.map((user, id)=>SingleListItem(user, id))}

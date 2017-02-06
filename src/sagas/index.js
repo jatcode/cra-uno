@@ -1,8 +1,4 @@
-import { call, put, takeEvery, takeLatest/*,select, take*/, fork } from 'redux-saga/effects';
-import { browserHistory } from 'react-router';
-// import { 
-// 	apiGetAllTodos, apiCreateTodo, apiUpdateTodo, 
-// 	apiDeleteTodo, apiGetSingleTodo } from '../services/TodosApi';
+import { fork } from 'redux-saga/effects';
 
 import * as userSagas from '../containers/users/sagas'
 
@@ -12,6 +8,7 @@ export default function* rootSaga(feathersApp){
       fork(userSagas.getUsersSaga, feathersApp),
   ]
 }
+
 // fork(updateTodoSaga, feathersApp),
 // fork(getTodosSaga, feathersApp),
 // fork(getSingleTodoSaga, feathersApp),

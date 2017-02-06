@@ -23,8 +23,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 let store = createStore( rootReducer /*,initialStateForStore*/, composeEnhancers(storeEnhancer));
 
 /*Feathers conf*/
-const serverHost ='http://10.190.8.190:3030';
-// const serverHost = 'http://10.190.8.190:3030';
+// const serverHost ='http://10.190.8.190:3030';
+const serverHost ='http://localhost:3030';
 const feathersApp = 
   feathers()
     .configure(rest(serverHost).superagent(superagent))

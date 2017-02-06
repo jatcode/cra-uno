@@ -73,17 +73,30 @@ MyGrid.propTypes={
 }
 export {MyGrid};
 
-export const SingleListItem= ({firstName,lastName, email, picture, options})=>
-  <div>
-		 <dl>
-			 <dt>{firstName}</dt>
-			 <dt>{lastName}</dt>
-			 <dt>{email}</dt>
-			 <dt>{picture}</dt>
-			 <dt>{options}</dt>
-			 <dd>{options.geoLocation}</dd>
-       <dd>{options.geoLocation.latitude}</dd>
-       <dd>{options.geoLocation.longitude}</dd>
-			 <dd>{options.racis}</dd>
-		 </dl>
+export const SingleListItem= ({_id,firsName,lastName, email, picture,options:{racis='T',geoLocation:{longitude,latitude}}},i)=>
+  <div key={i}>
+     <a href={_id} ><h3>{firsName} {lastName}</h3></a> 
+     <em>{email}-{picture}</em>
+     <br></br>
+     <span>
+       Lat={latitude}, Long={longitude}
+       <br></br>
+       <a href="#" >{racis}</a>
+     </span>
   </div>
+  export function FlexComponent(){
+    return (
+      <div className="contenedor">
+        <div className="box box1">1</div>
+        <div className="box box2">2</div>
+        <div className="box box3">3</div>
+        <div className="box box4">4</div>
+        <div className="box box5">5</div>
+        <div className="box box6">6</div>
+        <div className="box box7">7</div>
+        <div className="box box8">8</div>
+        <div className="box box9">9</div>
+        <div className="box box10">10</div>
+      </div>
+    );
+  }

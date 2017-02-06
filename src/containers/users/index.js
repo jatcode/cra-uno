@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import { SingleListItem }  from '../../components/MyComponents';
-import { loadAllusers } from './actions';
-
+import { SingleListItem, FlexComponent }  from '../../components/MyComponents';
+import './user.css';
 class User extends Component {
 	
 	componentDidMount(){
-		loadAllusers();
+		// this.props.loadAllusers();
+		// {users.map((user, i)=> SingleListItem(user,i))}
 	}
 	
 	render(){
+		const { users } = this.props;
+		// console.log('users ,',users)
 		return (
 			<div>
-				Hello mundo user
+				<FlexComponent />
 			</div>
 		);
 	}

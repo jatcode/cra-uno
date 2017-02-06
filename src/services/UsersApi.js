@@ -3,11 +3,11 @@ export function apiGetAllUsers(feathersApp){
   return userService
     .find({})
     .then((value) => {
-    	// console.log('data en API',value.data);
+    	//  console.log('data en API',value.data);
     	return value.data;
     })
     .catch((err) => {
-    	// console.log('error en api',err);
+    	 console.log('error en api',err);
     	return err.data;
     })
 }
