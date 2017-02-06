@@ -19,7 +19,7 @@ export function MyInput({input, meta: { touched, error }, ...custom}) {
 
   const hasError = touched && error;
   return (
-    <div>
+    <div className="formItem">
       <label >{initialCapitalCase(input.name)}</label>
       <div>
         <input {...input} />
@@ -73,9 +73,11 @@ MyGrid.propTypes={
 }
 export {MyGrid};
 
-export const SingleListItem= ({_id,firsName,lastName, email, picture,options:{racis='T',geoLocation:{longitude,latitude}}},i)=>
+export const SingleListItem= (
+  {_id, firstName, lastName, description, email, 
+    picture, racis='T',roleName,geoLocation:{longitude,latitude}},i)=>
   <div key={i}>
-     <a href={_id} ><h3>{firsName} {lastName}</h3></a> 
+     <a href={_id} ><h3>{firstName} {lastName}</h3></a> 
      <em>{email}-{picture}</em>
      <br></br>
      <span>

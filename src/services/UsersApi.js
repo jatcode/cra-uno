@@ -3,7 +3,7 @@ export function apiGetAllUsers(feathersApp){
   return userService
     .find({})
     .then((value) => {
-    	//  console.log('data en API',value.data);
+    	  console.log('data en API',value.data);
     	return value.data;
     })
     .catch((err) => {
@@ -23,17 +23,19 @@ export function apiGetSingleUser(feathersApp,idUser){
     .then((data, err) => data.data);
 }
 
-export function apiCreateUser(feathersApp,todo, description){
+export function apiCreateUser(feathersApp,todo, description,...formValues){
   const userService = feathersApp.service('users');
-  return userService.create({todo,description})
-    .then((value) => {
-      // console.log('data en API',value);
-      return value;
-    })
-    .catch((err) => {
-      console.log('error en api',err);
-      return err;
-    })
+  console.log('en api,',...formValues);
+  return {...formValues};
+  // return userService.create({todo,description})
+  //   .then((value) => {
+  //     console.log('data en API',value);
+  //     return value;
+  //   })
+  //   .catch((err) => {
+  //     console.log('error en api',err);
+  //     return err;
+  //   })
 }  
 
 export function apiDeleteUser(feathersApp,idUser){  

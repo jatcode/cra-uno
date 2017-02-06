@@ -19,24 +19,20 @@ function* getUsers(feathersApp){
 }
 // //CREATE_USER
 function* createUser(feathersApp,action){
-  const { values:{todo, description} } = action
+  console.log('ACTION EN SAGA',action.payload);
   // const { 
-  //   values:{
-  //     firsName,
+  //     firstName,
   //     lastName,
   //     email,
   //     picture,
-  //     options:{
-  //       racis,
-  //       geoLocation:{
-  //         longitude,
-  //         latitude
-  //       }
-  //     },
-  //   } } = action
-  // 
+  //     username,
+  //     description,
+  //     racis,
+  //     longitude,
+  //     latitude
+  // } = action.payload
   try {
-    const resp = yield call(apiCreateUser,feathersApp, todo, description)
+    const resp = yield call(apiCreateUser,feathersApp, action.payload)
     yield put({type:type.CREATE_USER_SUCCEEDED,resp});
 		yield browserHistory.push(`/`);
 		yield put({type:type.GET_USERS});

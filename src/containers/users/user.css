@@ -17,17 +17,56 @@
 .box8 { background: #bdc3c7}
 .box9 { background: #2ecc71}
 .box10 { background: #16a085}
-
+.formItem{
+	/*border: 5px solid #7D1A6D;*/
+	/*display:flex;*/
+	/*flex-flow: row;*/
+	flex-direction: column;
+	
+}
 .contenedor{
-	display:grid;
+	display:flex;
 	border: 10px solid mistyrose;
-	/*height: 100vh;*/
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	/*height: 100vh;*/	
+	flex-direction: column;
+	background: #E9EAED
 }
 .box{
-	width: 33.3333%;
+
+}
+.breadcrumb{
+	flex: 1;
+}
+.formrow{
+	/*display: flex;*/
+	/*flex-flow: row;*/
+	/*padding: 0 15px -15px 0;*/
+}
+.left{
+	flex:0 1;
+	background: white;
+	padding: 0px;
+	margin: 0 1em 0 1em;
+	width: 33.333%;
+	
+}
+.right{
+	flex:auto;
+	background: white;
+	padding: 0px;
+	margin: 0 1em 0 1em;
+	width: 33.333%;
+	order: 2		
 }
 
+
+.mheader{
+	color: white;
+	background: #424242;
+	height: 40px;
+	
+}
+	
 /*.contenedor{
 	display: flex;
 	border: 10px solid mistyrose;

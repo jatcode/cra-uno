@@ -7,7 +7,7 @@ const Main = React.createClass({
 		return (
 			<Container>
 				<MyLink toValue='/' label='Todos List'/>				
-				<MyLink toValue='/addtodo' label='Add Todo'/>
+				<MyLink toValue='/adduser' label='Add User'/>
 				{React.cloneElement(this.props.children, this.props)}
 			</Container>
 		);
