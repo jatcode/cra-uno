@@ -1,15 +1,23 @@
 import React from 'react';
 // import { Link,browserHistory } from 'react-router';
-import { /*Menu, Header,*/ Container} from 'semantic-ui-react'
+import { Header, Container, Content, Footer } from '../layout/index';
 import { MyLink } from './MyComponents'
 const Main = React.createClass({
 	render(){
 		return (
-			<Container>
-				<MyLink toValue='/' label='Todos List'/>				
-				<MyLink toValue='/adduser' label='Add User'/>
-				{React.cloneElement(this.props.children, this.props)}
-			</Container>
+			<div>
+				<Header>
+					<MyLink toValue='/' label='Home'/>
+					<MyLink toValue='/adduser' label='Add User'/>
+				</Header> 
+				<Container >
+					<Content>
+						{React.cloneElement(this.props.children, this.props)}
+					</Content>
+					<Footer />
+				</Container>
+				
+			</div>
 		);
 	}
 });

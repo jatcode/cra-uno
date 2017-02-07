@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import {  Header, Icon } from 'semantic-ui-react';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import {  withRouter } from 'react-router';
-import { MyInput, MyTextarea } from '../../components/MyComponents'; 
+import { MyInput, MyTextarea, MyFileInput,
+  GettingStartedGoogleMap
+} from '../../components/MyComponents'; 
 import './user.css';
 
 class AddUser extends Component {   
@@ -11,6 +13,15 @@ class AddUser extends Component {
   static contexTypes = {
     router : PropTypes.object
   };
+  handleImage(e){
+    e.preventDefault();
+    let reader= new FileReader();
+    let file= e.target.files[0];
+    reader.onloadend = ()=>{
+      
+    }
+    
+  }
   submit(values){    
 		// console.log('values en submit ',values);
 		// console.log('values en this.props ',this.props);
@@ -47,10 +58,24 @@ class AddUser extends Component {
             </div>
             <div className="  left">
               <span className="mheader">Profile Settings</span>
-              <Field name='picture' component={MyInput} />
+              {/* <Field name='picture' component={MyInput} /> */}
+              <Field name='picture' component={MyFileInput} onChange={this.handleImage} />
+              
               <Field name='roleName' component={MyInput} />
               <Field name='latitude' component={MyInput} />
               <Field name='longitude' component={MyInput} />
+              <GettingStartedGoogleMap
+    containerElement={
+      <div style={{ height: `100%` }} />
+    }
+    mapElement={
+      <div style={{ height: `100%` }} />
+    }
+    onMapLoad={_.noop}
+    onMapClick={_.noop}
+    markers={markers}
+    onMarkerRightClick={_.noop}
+  />
               <Field name='racis' component="select">
                 <option value="">Select a racis...</option>
                 <option value="#ff0000">Red</option>
