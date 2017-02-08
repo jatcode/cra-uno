@@ -38,6 +38,14 @@ class AddUser extends Component {
   }
   render() {
     const { handleSubmit, pristine, reset, submitting }= this.props;
+    const markers= [{
+      position: {
+        lat: 25.0112183,
+        lng: 121.52067570000001,
+      },
+      key: `Taiwan`,
+      defaultAnimation: 2,
+    }];
     return (      
       <div className="contenedor">
         <div className="breadcrumb">
@@ -65,17 +73,17 @@ class AddUser extends Component {
               <Field name='latitude' component={MyInput} />
               <Field name='longitude' component={MyInput} />
               <GettingStartedGoogleMap
-    containerElement={
-      <div style={{ height: `100%` }} />
-    }
-    mapElement={
-      <div style={{ height: `100%` }} />
-    }
-    onMapLoad={_.noop}
-    onMapClick={_.noop}
-    markers={markers}
-    onMarkerRightClick={_.noop}
-  />
+                  containerElement={
+                    <div style={{ height: `30%` }} />
+                  }
+                  mapElement={
+                    <div style={{ height: `30%` }} />
+                  }
+                  //  onMapLoad={_.noop}
+                  // onMapClick={_.noop}
+                  markers={this.markers}
+                  // onMarkerRightClick={_.noop}
+              />
               <Field name='racis' component="select">
                 <option value="">Select a racis...</option>
                 <option value="#ff0000">Red</option>
