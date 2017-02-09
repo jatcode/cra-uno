@@ -4,15 +4,23 @@ import {  Header, Icon } from 'semantic-ui-react';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import {  withRouter } from 'react-router';
 import { MyInput, MyTextarea, MyFileInput,
-  GettingStartedGoogleMap
+  SimpleMap
 } from '../../components/MyComponents'; 
+import ImageUpload  from '../../components/ImageUpload'
 import './user.css';
+
 
 class AddUser extends Component {   
    
   static contexTypes = {
     router : PropTypes.object
   };
+  handleMapClick = this.handleMapClick.bind(this);
+  handleMapClick(e, ...resto) {
+    // console.log('mapClick,',this.props);
+    // console.log('THE REST,',resto);
+    console.log('e ,',e.latLng.toJSON());
+  }
   handleImage(e){
     e.preventDefault();
     let reader= new FileReader();
@@ -49,10 +57,10 @@ class AddUser extends Component {
     return (      
       <div className="contenedor">
         <div className="breadcrumb">
-          <Header as='h2' icon textAlign='center'>
+          {/* <Header as='h2' icon textAlign='center'>
             <Icon name='users' circular />
             <Header.Content> Add User </Header.Content>
-          </Header>
+          </Header> */}
         </div>
         <form onSubmit={handleSubmit(this.submit.bind(this))}>
           <div className="formrow">            
@@ -66,23 +74,20 @@ class AddUser extends Component {
             </div>
             <div className="  left">
               <span className="mheader">Profile Settings</span>
-              {/* <Field name='picture' component={MyInput} /> */}
-              <Field name='picture' component={MyFileInput} onChange={this.handleImage} />
+              <Field name='picture' component={ImageUpload} onChange={this.handleImage} />
+              
               
               <Field name='roleName' component={MyInput} />
               <Field name='latitude' component={MyInput} />
               <Field name='longitude' component={MyInput} />
-              <GettingStartedGoogleMap
-                  containerElement={
-                    <div style={{ height: `30%` }} />
-                  }
-                  mapElement={
-                    <div style={{ height: `30%` }} />
-                  }
-                  //  onMapLoad={_.noop}
-                  // onMapClick={_.noop}
-                  markers={this.markers}
-                  // onMarkerRightClick={_.noop}
+              <SimpleMap 
+                containerElement={
+                  <div style={{ height: `300px` }} />
+                }
+                mapElement={
+                  <div style={{ height: `100%` }} />
+                }
+                onMapClick={this.handleMapClick}
               />
               <Field name='racis' component="select">
                 <option value="">Select a racis...</option>

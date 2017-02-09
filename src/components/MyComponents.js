@@ -47,7 +47,7 @@ export function MyFileInput({input, meta: { touched, error }, ...custom}) {
       <div className="formItem">
         <label >{initialCapitalCase(input.name)}</label>
         <div>          
-          <input {...input}  type="file" value={ null }/>
+          <input {...input}  type="file" value={ `undefined` }/>
           {hasError && <Message error header='Error' content={error} />}
         </div>
       </div>
@@ -69,6 +69,12 @@ export  const GettingStartedGoogleMap = withGoogleMap(props => (
       ))}
     </GoogleMap>
   ));
+export const SimpleMap= withGoogleMap(props =>(
+  <GoogleMap
+    defaultZoom={8}
+    defaultCenter={{lat:-34.397,lng:150.644}}
+    onClick={props.onMapClick}
+  />));  
 
 export const SingleListItem= (
   {_id, firstName, lastName, description, email, 
