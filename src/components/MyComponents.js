@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Message } from 'semantic-ui-react';
@@ -20,9 +21,9 @@ export function MyInput({input, meta: { touched, error }, ...custom}) {
 
   const hasError = touched && error;
   return (
-    <div className="formItem">
-      <label >{initialCapitalCase(input.name)}</label>
-      <div>
+    <div className="formContainer">
+      <label className="formItem">{initialCapitalCase(input.name)}</label>
+      <div className="formItem">
         <input {...input} />
         {hasError && <Message error header='Error' content={error} />}
       </div>
@@ -72,9 +73,18 @@ export  const GettingStartedGoogleMap = withGoogleMap(props => (
 export const SimpleMap= withGoogleMap(props =>(
   <GoogleMap
     defaultZoom={8}
-    defaultCenter={{lat:-34.397,lng:150.644}}
+    defaultCenter={{lat:13.66191391961704,lng:-89.25284385681152}}
     onClick={props.onMapClick}
-  />));  
+  > 
+  <Marker
+    defaultPosition={{lat:13.66191391961704,lng:-89.25284385681152}}
+    draggable={true}
+    // {...marker}
+    // onRightClick={() => props.onMarkerRightClick(index)}
+    onClick={props.onMarkerClick}
+  />
+    
+  </GoogleMap>));  
 
 export const SingleListItem= (
   {_id, firstName, lastName, description, email, 

@@ -17,53 +17,64 @@
 .box8 { background: #bdc3c7}
 .box9 { background: #2ecc71}
 .box10 { background: #16a085}
+
+.contenedor{
+	/*display:flex;*/
+	border: 10px solid mistyrose;
+	/*height: 100vh;*/	
+	/*flex-direction: column;*/
+	background: #E9EAED
+}
+.box{
+	
+}
+
+
+.formContainer{
+	/*flex-direction: column;*/
+	
+}
 .formItem{
 	/*border: 5px solid #7D1A6D;*/
 	/*display:flex;*/
 	/*flex-flow: row;*/
-	flex-direction: column;
+	/*flex-grow: 1;
+	flex-basis: 200px;*/
+	/*max-height: 40px;*/
+}
+.left{
+	/*flex:0 1;*/
+	background: white;
+	padding: 0px;
+	margin: 0 1em 0 1em;
+	/*width: 33.333%;*/
 	
 }
-.contenedor{
-	display:flex;
-	border: 10px solid mistyrose;
-	/*height: 100vh;*/	
-	flex-direction: column;
-	background: #E9EAED
-}
-.box{
-
+.right{
+	/*flex:auto;*/
+	background: white;
+	padding: 0px;
+	margin: 0 1em 0 1em;
+	/*width: 33.333%;*/
+	order: 2		
 }
 .breadcrumb{
-	flex: 1;
+	position: relative;
+	left: 50%;
+	font-weight: bold;
+	/*background: blue;*/
 }
 .formrow{
 	/*display: flex;*/
 	/*flex-flow: row;*/
 	/*padding: 0 15px -15px 0;*/
 }
-.left{
-	flex:0 1;
-	background: white;
-	padding: 0px;
-	margin: 0 1em 0 1em;
-	width: 33.333%;
-	
-}
-.right{
-	flex:auto;
-	background: white;
-	padding: 0px;
-	margin: 0 1em 0 1em;
-	width: 33.333%;
-	order: 2		
-}
 
 
 .mheader{
 	color: white;
 	background: #424242;
-	height: 40px;
+	max-height: 40px;
 	
 }
 	

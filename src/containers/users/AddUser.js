@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import {  Header, Icon } from 'semantic-ui-react';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import {  withRouter } from 'react-router';
-import { MyInput, MyTextarea, MyFileInput,
-  SimpleMap
+import { MyInput, MyTextarea, SimpleMap
 } from '../../components/MyComponents'; 
 import ImageUpload  from '../../components/ImageUpload'
 import './user.css';
@@ -16,11 +14,16 @@ class AddUser extends Component {
     router : PropTypes.object
   };
   handleMapClick = this.handleMapClick.bind(this);
-  handleMapClick(e, ...resto) {
-    // console.log('mapClick,',this.props);
-    // console.log('THE REST,',resto);
-    console.log('e ,',e.latLng.toJSON());
+  handleMarkerClick = this.handleMarkerClick.bind(this);
+  handleMapClick(e) {
+    // console.log('just local PROPS,',e);
   }
+  handleMarkerClick(e) {
+    const { lat, lng } =e.latLng.toJSON();
+    this.props.change('latitude',lat);
+    this.props.change('longitude',lng);
+  }
+  
   handleImage(e){
     e.preventDefault();
     let reader= new FileReader();
@@ -33,7 +36,6 @@ class AddUser extends Component {
   submit(values){    
 		// console.log('values en submit ',values);
 		// console.log('values en this.props ',this.props);
-    
 		try{
 			this.props.createUser(values);
 		}catch(e){
@@ -46,25 +48,14 @@ class AddUser extends Component {
   }
   render() {
     const { handleSubmit, pristine, reset, submitting }= this.props;
-    const markers= [{
-      position: {
-        lat: 25.0112183,
-        lng: 121.52067570000001,
-      },
-      key: `Taiwan`,
-      defaultAnimation: 2,
-    }];
     return (      
       <div className="contenedor">
         <div className="breadcrumb">
-          {/* <Header as='h2' icon textAlign='center'>
-            <Icon name='users' circular />
-            <Header.Content> Add User </Header.Content>
-          </Header> */}
+          <h3>Add User</h3>
         </div>
         <form onSubmit={handleSubmit(this.submit.bind(this))}>
-          <div className="formrow">            
-            <div className=" right">
+          <div >            
+            <div className="right">
               <span className="mheader">Personal Details</span>
               <Field name='firstName' component={MyInput} />
               <Field name='lastName' component={MyInput} />
@@ -72,11 +63,9 @@ class AddUser extends Component {
               <Field name='username' component={MyInput} />
               <Field name='description' component={MyTextarea} />              
             </div>
-            <div className="  left">
+            <div className="left">
               <span className="mheader">Profile Settings</span>
               <Field name='picture' component={ImageUpload} onChange={this.handleImage} />
-              
-              
               <Field name='roleName' component={MyInput} />
               <Field name='latitude' component={MyInput} />
               <Field name='longitude' component={MyInput} />
@@ -88,6 +77,7 @@ class AddUser extends Component {
                   <div style={{ height: `100%` }} />
                 }
                 onMapClick={this.handleMapClick}
+                onMarkerClick={this.handleMarkerClick}
               />
               <Field name='racis' component="select">
                 <option value="">Select a racis...</option>
@@ -105,7 +95,7 @@ class AddUser extends Component {
             </div>
           </div>
           <br/>
-          <div className='ui center aligned'>
+          <div className=''>
             <button type='submit' disabled={submitting}>Submit</button>
             <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
           </div>

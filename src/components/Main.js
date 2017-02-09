@@ -6,16 +6,16 @@ const Main = React.createClass({
 	render(){
 		return (
 			<div>
-				<Header>
+				{/* <Header> */}
 					<MyLink toValue='/' label='Home'/>
 					<MyLink toValue='/adduser' label='Add User'/>
-				</Header> 
-				<Container >
-					<Content>
+				{/* </Header>  */}
+				{/* <Container > */}
+					{/* <Content> */}
 						{React.cloneElement(this.props.children, this.props)}
-					</Content>
-					<Footer />
-				</Container>
+					{/* </Content> */}
+					{/* <Footer /> */}
+				{/* </Container> */}
 				
 			</div>
 		);
