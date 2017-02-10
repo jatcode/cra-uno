@@ -34,19 +34,17 @@ class ImageUpload extends Component {
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img src={imagePreviewUrl} style={{maxWidth: `calc(100% - 20px)`,maxHeight: `calc(100% - 50px)`}}/>);
+      $imagePreview = (<img src={imagePreviewUrl} style={{maxWidth: `calc(100% - 20px)`,maxHeight: `100px`}}/>);
     } else {
       $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
     }
 
     return (
       <div className="previewComponent">
-        <form  className="pure-form pure-form-stacked" onSubmit={(e)=>this._handleSubmit(e)}>
-          {/* <input className="fileInput" type="file" onChange={(e)=>this._handleImageChange(e)} /> */}
-          {/* <button className="submitButton" type="submit" onClick={(e)=>this._handleSubmit(e)}>Upload Image</button> */}
+        {/* <form  className="pure-form pure-form-stacked" onSubmit={(e)=>this._handleSubmit(e)}> */}
           <input   type="file" onChange={(e)=>this._handleImageChange(e)} />
           <button className="pure-button pure-button-primary" type="submit" onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
-        </form>
+        {/* </form> */}
         <div className="imgPreview">
           {$imagePreview}
         </div>

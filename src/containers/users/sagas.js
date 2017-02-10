@@ -18,19 +18,7 @@ function* getUsers(feathersApp){
   yield takeEvery(type.GET_USERS,getUsers,feathersApp);
 }
 // //CREATE_USER
-function* createUser(feathersApp,action){
-  console.log('ACTION EN SAGA',action.payload);
-  // const { 
-  //     firstName,
-  //     lastName,
-  //     email,
-  //     picture,
-  //     username,
-  //     description,
-  //     racis,
-  //     longitude,
-  //     latitude
-  // } = action.payload
+function* createUser(feathersApp,action){  
   try {
     const resp = yield call(apiCreateUser,feathersApp, action.payload)
     yield put({type:type.CREATE_USER_SUCCEEDED,resp});

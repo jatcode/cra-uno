@@ -3,7 +3,20 @@ export function apiGetAllUsers(feathersApp){
   return userService
     .find({})
     .then((value) => {
-    	  console.log('data en API',value.data);
+    	  // console.log('data en API',value.data);
+    	return value.data;
+    })
+    .catch((err) => {
+    	 console.log('error en api',err);
+    	return err.data;
+    })
+}
+export function apiGetRacis(feathersApp){  
+  const userService = feathersApp.service('users');
+  return userService
+    .find({})
+    .then((value) => {
+    	  console.log('RACIS en API',value.data);
     	return value.data;
     })
     .catch((err) => {
@@ -23,19 +36,35 @@ export function apiGetSingleUser(feathersApp,idUser){
     .then((data, err) => data.data);
 }
 
-export function apiCreateUser(feathersApp,todo, description,...formValues){
+export function apiCreateUser(feathersApp,formValues){
+  // console.log('before destructuring',formValues);
+  var [{ 
+      firstName,
+      lastName,
+      email,
+      picture="default.jpg",
+      username,
+      description,
+      roleName,
+      racis,
+      longitude,
+      latitude
+  }] = formValues;  
   const userService = feathersApp.service('users');
-  console.log('en api,',...formValues);
-  return {...formValues};
-  // return userService.create({todo,description})
-  //   .then((value) => {
-  //     console.log('data en API',value);
-  //     return value;
-  //   })
-  //   .catch((err) => {
-  //     console.log('error en api',err);
-  //     return err;
-  //   })
+  return userService.create({
+    firstName, lastName, email,
+    username,password:" ",
+    description, roleName,
+    racis, picture,  
+    geoLocation:{latitude, longitude}})
+    .then((value) => {
+      console.log('User created ->data en API',value);
+      return value;
+    })
+    .catch((err) => {
+      console.log('error en create api',err);
+      return err;
+    })
 }  
 
 export function apiDeleteUser(feathersApp,idUser){  

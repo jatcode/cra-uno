@@ -3,7 +3,7 @@ import { SingleListItem }  from '../../components/MyComponents';
 import './user.css';
 class User extends Component {
 	
-	componentDidMount(){
+ componentDidMount(){
 		this.props.loadAllusers();
 	}
 	

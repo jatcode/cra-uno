@@ -26,11 +26,11 @@ class AddUser extends Component {
   
   handleImage(e){
     e.preventDefault();
-    let reader= new FileReader();
-    let file= e.target.files[0];
-    reader.onloadend = ()=>{
-      
-    }
+    // let reader= new FileReader();
+    // let file= e.target.files[0];
+    // reader.onloadend = ()=>{
+    //   
+    // }
     
   }
   submit(values){    
