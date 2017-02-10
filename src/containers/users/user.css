@@ -18,45 +18,40 @@
 .box9 { background: #2ecc71}
 .box10 { background: #16a085}
 
+.box{
+}
 .contenedor{
-	/*display:flex;*/
+	display:flex;
 	border: 10px solid mistyrose;
-	/*height: 100vh;*/	
-	/*flex-direction: column;*/
 	background: #E9EAED
 }
-.box{
-	
+
+.column{
+	display: flex;
+	flex-direction: column;
+	border: 5px solid grey;
+	/*padding: 4px;*/
+	/*margin: 0 1em 0 1em;*/
 }
 
+.right{
+	flex: 2;
+	/*background: white;*/
+	/*padding: 0px;*/
+	/*margin: 0 1em 0 1em;*/
+	/*width: 33.333%;*/
+	/*order: 2		*/
+}
+	
+.left{
+}
 
 .formContainer{
-	/*flex-direction: column;*/
-	
+	display: flex;
+	flex-direction: column;
 }
 .formItem{
-	/*border: 5px solid #7D1A6D;*/
-	/*display:flex;*/
-	/*flex-flow: row;*/
-	/*flex-grow: 1;
-	flex-basis: 200px;*/
-	/*max-height: 40px;*/
-}
-.left{
-	/*flex:0 1;*/
-	background: white;
-	padding: 0px;
-	margin: 0 1em 0 1em;
-	/*width: 33.333%;*/
-	
-}
-.right{
-	/*flex:auto;*/
-	background: white;
-	padding: 0px;
-	margin: 0 1em 0 1em;
-	/*width: 33.333%;*/
-	order: 2		
+	/*flex: 1;*/
 }
 .breadcrumb{
 	position: relative;

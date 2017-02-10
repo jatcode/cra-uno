@@ -49,55 +49,53 @@ class AddUser extends Component {
   render() {
     const { handleSubmit, pristine, reset, submitting }= this.props;
     return (      
-      <div className="contenedor">
-        <div className="breadcrumb">
+      <div>
+        {/* <div className="breadcrumb">
           <h3>Add User</h3>
-        </div>
-        <form onSubmit={handleSubmit(this.submit.bind(this))}>
-          <div >            
-            <div className="right">
-              <span className="mheader">Personal Details</span>
-              <Field name='firstName' component={MyInput} />
-              <Field name='lastName' component={MyInput} />
-              <Field name='email' component={MyInput} />
-              <Field name='username' component={MyInput} />
-              <Field name='description' component={MyTextarea} />              
-            </div>
-            <div className="left">
-              <span className="mheader">Profile Settings</span>
-              <Field name='picture' component={ImageUpload} onChange={this.handleImage} />
-              <Field name='roleName' component={MyInput} />
-              <Field name='latitude' component={MyInput} />
-              <Field name='longitude' component={MyInput} />
-              <SimpleMap 
-                containerElement={
-                  <div style={{ height: `300px` }} />
-                }
-                mapElement={
-                  <div style={{ height: `100%` }} />
-                }
-                onMapClick={this.handleMapClick}
-                onMarkerClick={this.handleMarkerClick}
-              />
-              <Field name='racis' component="select">
-                <option value="">Select a racis...</option>
-                <option value="#ff0000">Red</option>
-                <option value="#00ff00">Green</option>
-                <option value="#0000ff">Blue</option>
-                  {/* { colors.map(
+        </div> */}
+        <form  className="pure-form pure-form-stacked contenedor" onSubmit={handleSubmit(this.submit.bind(this))}>
+          <div className="column left">
+            <span className="mheader">Profile Settings</span>
+            <Field name='picture'  component={ImageUpload} onChange={this.handleImage} />
+            <Field name='roleName' component={MyInput} />
+            <Field name='latitude' component={MyInput} />
+            <Field name='longitude' component={MyInput} />
+            <SimpleMap 
+              containerElement={
+                <div style={{ height: `300px` }} ></div>
+              }
+              mapElement={
+                <div style={{ height: `100%` }} ></div>
+              }
+              onMapClick={this.handleMapClick}
+              onMarkerClick={this.handleMarkerClick}
+            />
+            <Field name='racis' component="select">
+              <option value="">Select a racis...</option>
+              <option value="#ff0000">Red</option>
+              <option value="#00ff00">Green</option>
+              <option value="#0000ff">Blue</option>
+                    {/* { colors.map(
                       colorOption =>
-                        <option value={colorOption} key={colorOption}>
-                            {colorOption}
-                        </option>
-                      )
-                  } */}
-              </Field>
-            </div>
-          </div>
+                      <option value={colorOption} key={colorOption}>
+                      {colorOption}
+                    </option>
+                  )
+                } */}
+            </Field>
           <br/>
-          <div className=''>
-            <button type='submit' disabled={submitting}>Submit</button>
-            <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+          <div>
+            <button className='pure-button pure-button-primary' type='submit' disabled={submitting}>Submit</button>
+            <button className='pure-button ' type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+          </div>
+          </div>
+          <div className="column right">
+            <span className="mheader">Personal Details</span>
+            <Field name='firstName' component={MyInput} />
+            <Field name='lastName' component={MyInput} />
+            <Field name='email' component={MyInput} />
+            <Field name='username' component={MyInput} />
+            <Field name='description' component={MyTextarea} />              
           </div>
         </form>
       </div>

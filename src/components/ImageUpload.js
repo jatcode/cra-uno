@@ -41,11 +41,11 @@ class ImageUpload extends Component {
 
     return (
       <div className="previewComponent">
-        <form onSubmit={(e)=>this._handleSubmit(e)}>
+        <form  className="pure-form pure-form-stacked" onSubmit={(e)=>this._handleSubmit(e)}>
           {/* <input className="fileInput" type="file" onChange={(e)=>this._handleImageChange(e)} /> */}
           {/* <button className="submitButton" type="submit" onClick={(e)=>this._handleSubmit(e)}>Upload Image</button> */}
-          <input  type="file" onChange={(e)=>this._handleImageChange(e)} />
-          <button type="submit" onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
+          <input   type="file" onChange={(e)=>this._handleImageChange(e)} />
+          <button className="pure-button pure-button-primary" type="submit" onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
         </form>
         <div className="imgPreview">
           {$imagePreview}

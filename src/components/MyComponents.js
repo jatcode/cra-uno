@@ -12,7 +12,16 @@ export const MyLink = ({toValue, label}) =>
       {label}
     </Link>
   </div>
-
+export const MyLinkItem = ({toValue, label}) =>
+    <Link to={ toValue } className='pure-menu-item pure-menu-link'>
+      {label}
+    </Link>
+export const MenuList = (props) =>
+    <div className="pure-menu pure-menu-horizontal">
+      <div className="pure-menu-list">
+        {props.children}
+      </div>
+    </div>
 export function initialCapitalCase(string) {
   return startCase(toLower(string));
 }
@@ -21,25 +30,21 @@ export function MyInput({input, meta: { touched, error }, ...custom}) {
 
   const hasError = touched && error;
   return (
-    <div className="formContainer">
-      <label className="formItem">{initialCapitalCase(input.name)}</label>
-      <div className="formItem">
-        <input {...input} />
+      <div className="formContainer">
+        <label >{initialCapitalCase(input.name)}</label>
+        <input className="formItem" {...input} />
         {hasError && <Message error header='Error' content={error} />}
       </div>
-    </div>
   );
 }
 export function MyTextarea({input, meta: { touched, error }, ...custom}) {
   const hasError = touched && error;
   return (
-    <div>
-      <label >{initialCapitalCase(input.name)}</label>
-      <div>
-        <textarea {...input} placeholder='contente' />
+      <div className="formContainer">
+        <label >{initialCapitalCase(input.name)}</label>
+        <textarea  rows="15" className="  formItem" {...input} placeholder='contente' />
         {hasError && <span>{error}</span>}
       </div>
-    </div>
   );
 }
 export function MyFileInput({input, meta: { touched, error }, ...custom}) {

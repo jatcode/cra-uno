@@ -1,14 +1,16 @@
 import React from 'react';
 // import { Link,browserHistory } from 'react-router';
 import { Header, Container, Content, Footer } from '../layout/index';
-import { MyLink } from './MyComponents'
+import {  MyLinkItem, MenuList } from './MyComponents'
 const Main = React.createClass({
 	render(){
 		return (
 			<div>
 				{/* <Header> */}
-					<MyLink toValue='/' label='Home'/>
-					<MyLink toValue='/adduser' label='Add User'/>
+				<MenuList>
+					<MyLinkItem toValue='/' label='Home'/>
+					<MyLinkItem toValue='/adduser' label='Add User'/>
+				</MenuList>
 				{/* </Header>  */}
 				{/* <Container > */}
 					{/* <Content> */}
