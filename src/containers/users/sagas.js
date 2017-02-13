@@ -20,8 +20,8 @@ function* getUsers(feathersApp){
 // //CREATE_USER
 function* createUser(feathersApp,action){  
   try {
-    const resp = yield call(apiCreateUser,feathersApp, action.payload)
-    yield put({type:type.CREATE_USER_SUCCEEDED,resp});
+    const result = yield call(apiCreateUser,feathersApp, action.payload)
+    yield put({type:type.CREATE_USER_SUCCEEDED,result});
 		yield browserHistory.push(`/`);
 		yield put({type:type.GET_USERS});
   } catch (error) {

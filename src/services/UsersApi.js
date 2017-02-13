@@ -1,22 +1,13 @@
 export function apiGetAllUsers(feathersApp){  
   const userService = feathersApp.service('users');
+  // console.log('this.Model',this.Model);
+  console.log('this',this);
+  console.log('userService',userService);
+  
   return userService
     .find({})
     .then((value) => {
     	  // console.log('data en API',value.data);
-    	return value.data;
-    })
-    .catch((err) => {
-    	 console.log('error en api',err);
-    	return err.data;
-    })
-}
-export function apiGetRacis(feathersApp){  
-  const userService = feathersApp.service('users');
-  return userService
-    .find({})
-    .then((value) => {
-    	  console.log('RACIS en API',value.data);
     	return value.data;
     })
     .catch((err) => {

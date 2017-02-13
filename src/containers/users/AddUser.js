@@ -4,15 +4,22 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 import {  withRouter } from 'react-router';
 import { MyInput, MyTextarea, SimpleMap
 } from '../../components/MyComponents'; 
-import ImageUpload  from '../../components/ImageUpload'
+import ImageUpload  from '../../components/ImageUpload';
+import SelectBox from '../../components/SelectBox';
 import './user.css';
 
 
-class AddUser extends Component {   
+class AddUser extends Component {
+  
+     
+  componentDidMount(){
+    
+  }
    
   static contexTypes = {
     router : PropTypes.object
   };
+  
   handleMapClick = this.handleMapClick.bind(this);
   handleMarkerClick = this.handleMarkerClick.bind(this);
   handleMapClick(e) {
@@ -70,19 +77,7 @@ class AddUser extends Component {
               onMapClick={this.handleMapClick}
               onMarkerClick={this.handleMarkerClick}
             />
-            <Field name='racis' component="select">
-              <option value="">Select a racis...</option>
-              <option value="#ff0000">Red</option>
-              <option value="#00ff00">Green</option>
-              <option value="#0000ff">Blue</option>
-                    {/* { colors.map(
-                      colorOption =>
-                      <option value={colorOption} key={colorOption}>
-                      {colorOption}
-                    </option>
-                  )
-                } */}
-            </Field>
+            <Field name='racis' component={SelectBox} />            
           <br/>
           <div>
             <button className='pure-button pure-button-primary' type='submit' disabled={submitting}>Submit</button>
