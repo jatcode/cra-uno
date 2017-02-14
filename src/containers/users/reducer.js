@@ -7,7 +7,7 @@ function userReducer(state=[], action){
 			return action.result;
 		case type.CREATE_USER_SUCCEEDED:
 			// console.log('ACTION en reducer USER,',action);
-			return {...state, otro:action.result};
+			return [...state, action.result];
 		default:
 			return state;
 	}
