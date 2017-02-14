@@ -1,8 +1,22 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import { browserHistory } from 'react-router';
 import * as type from './constants'
-import { apiGetAllUsers, apiCreateUser } from '../../services/UsersApi';
+import { apiGetRacis, apiGetAllUsers, apiCreateUser } from '../../services/UsersApi';
 
+
+//GET_RACIS
+function* getRACIS(feathersApp){
+  try {
+    const result = yield call(apiGetRacis,feathersApp)
+    yield put({type:'GET_RACIS_SUCCEDDED',result});
+  } catch (error) {
+    console.log('ERROR ON getRACIS executing saga ',error);
+     yield put({type:'GET_RACIS_FAILED',error})
+  } 
+}
+ export function* getRACISSaga(feathersApp){
+  yield takeEvery('GET_RACIS',getRACIS,feathersApp);
+}
 
 //GET_USERS
 function* getUsers(feathersApp){
@@ -21,12 +35,21 @@ function* getUsers(feathersApp){
 function* createUser(feathersApp,action){  
   try {
     const result = yield call(apiCreateUser,feathersApp, action.payload)
-    yield put({type:type.CREATE_USER_SUCCEEDED,result});
-		yield browserHistory.push(`/`);
-		yield put({type:type.GET_USERS});
+    const {_id} = result;
+    if(_id && Object.keys(result).length ===0){
+      console.log("this is the id CREATED,",_id)
+      console.log('LLAVES QUE TIENE EL OBJECTO',Object.keys(result).length);
+      yield put({type:type.CREATE_USER_SUCCEEDED,result});
+      yield browserHistory.push(`/`);
+      yield put({type:type.GET_USERS});
+    }else{
+      console.log("ID VALOR",_id);
+      console.log('LLAVES QUE TIENE EL OBJECTO',Object.keys(result).length);
+      yield put({type:type.CREATE_USER_FAILED,result});
+    }
   } catch (error) {
-    console.log('this is the error ',error);
-     yield put({type:type.CREATE_USER_FAILED,error})
+    console.log('ON CreateUser Saga Error ',error);
+    //  yield put({type:type.CREATE_USER_FAILED,error})
   } 
 }
 export function* createUserSaga(feathersApp){

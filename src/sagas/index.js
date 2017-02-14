@@ -7,6 +7,7 @@ export default function* rootSaga(feathersApp){
   yield[
       fork(userSagas.getUsersSaga, feathersApp),
       fork(userSagas.createUserSaga, feathersApp),
+      fork(userSagas.getRACISSaga, feathersApp),
   ]
 }
 

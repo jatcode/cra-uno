@@ -5,6 +5,7 @@ import { Message } from 'semantic-ui-react';
 import { Field } from 'redux-form'
 import { startCase, toLower } from 'lodash/string'
 import { withGoogleMap, Marker, GoogleMap } from "react-google-maps";
+import { browserHistory } from 'react-router';
 
 export const MyLink = ({toValue, label}) =>
   <div className='ui compact menu'>
@@ -59,7 +60,16 @@ export function MyFileInput({input, meta: { touched, error }, ...custom}) {
       </div>
     );
   }
-
+export function MySelect({options}){
+  return (
+    <select >
+      <option disabled="" value="">Select a racis...</option>
+      {options.map((option, i)=>
+        <option key={i}>{option}</option>
+      )}
+    </select>
+  );
+}
 export  const GettingStartedGoogleMap = withGoogleMap(props => (
     <GoogleMap
       ref={props.onMapLoad}
@@ -95,7 +105,7 @@ export const SingleListItem= (
   {_id, firstName, lastName, description, email, 
     picture, racis='T',roleName,geoLocation:{longitude,latitude}},i)=>
   <div key={i}>
-     <a href={_id} ><h3>{firstName} {lastName}</h3></a> 
+     <a href={_id}  onClick={() => browserHistory.push(`/updateUser/${_id}`)}><h3>{firstName} {lastName}</h3></a> 
      <em>{email}-{picture}</em>
      <br></br>
      <span>

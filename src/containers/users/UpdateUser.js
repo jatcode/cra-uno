@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import {  Header, Icon } from 'semantic-ui-react';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import { MyInput, MyTextarea } from '../MyComponents'; 
+import { MyInput, MyTextarea } from '../../components/MyComponents';
+ 
 
-class UpdateTodo extends Component {   
+class UpdateUser extends Component {   
    
 	 componentDidMount() {
 		 console.log(this.props.params.id);
-	 	this.props.loadFormTodo(this.props.params.id)
+    // his.props.loadFormTodo(this.props.params.id)
 	 }
 	 
   static contexTypes = {
@@ -30,6 +30,7 @@ class UpdateTodo extends Component {
     return (      
       <div>
         <div >
+          
           
             <h2> Add Todo </h2>
         </div>
@@ -55,17 +56,17 @@ const validate = values=>{
   return errors
 }
 
-UpdateTodo = reduxForm({
+UpdateUser = reduxForm({
   form: 'addTodo-form',
   validate,
 	enableReinitialize:true
-})(UpdateTodo); //conecting it to reduxform
+})(UpdateUser); //conecting it to reduxform
 
-UpdateTodo = connect( 
+UpdateUser = connect( 
 	state => ({
 		initialValues: state.formLoader // pull initial values from account reducer
-	}),null)(UpdateTodo); //connecting it to the main store
+	}),null)(UpdateUser); //connecting it to the main store
 
 
-export default UpdateTodo;
+export default UpdateUser;
 

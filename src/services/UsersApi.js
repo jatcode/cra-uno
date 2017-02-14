@@ -1,14 +1,27 @@
 export function apiGetAllUsers(feathersApp){  
   const userService = feathersApp.service('users');
   // console.log('this.Model',this.Model);
-  console.log('this',this);
-  console.log('userService',userService);
+  // console.log('this',this);
+  // console.log('userService',userService);
   
   return userService
     .find({})
     .then((value) => {
     	  // console.log('data en API',value.data);
     	return value.data;
+    })
+    .catch((err) => {
+    	 console.log('error en api',err);
+    	return err.data;
+    })
+}
+
+export function apiGetRacis(feathersApp){  
+  const userService = feathersApp.service('enums');
+  return userService
+    .find({query:{service:'users',path:'racis'}})
+    .then((value) => {
+    	return value;
     })
     .catch((err) => {
     	 console.log('error en api',err);
@@ -28,7 +41,6 @@ export function apiGetSingleUser(feathersApp,idUser){
 }
 
 export function apiCreateUser(feathersApp,formValues){
-  // console.log('before destructuring',formValues);
   var [{ 
       firstName,
       lastName,
@@ -43,18 +55,16 @@ export function apiCreateUser(feathersApp,formValues){
   }] = formValues;  
   const userService = feathersApp.service('users');
   return userService.create({
-    firstName, lastName, email,
-    username,password:" ",
-    description, roleName,
-    racis, picture,  
+    firstName, lastName, email, username,password:" ",
+    description, roleName, racis, picture,  
     geoLocation:{latitude, longitude}})
     .then((value) => {
-      console.log('User created ->data en API',value);
+      // console.log('User created ->data en API',value);
       return value;
     })
     .catch((err) => {
       console.log('error en create api',err);
-      return err;
+      return err.errors;
     })
 }  
 

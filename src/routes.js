@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from './containers/App';
 import Home from './components/Home';
 import AddUser from './containers/users/AddUser';
-import UpdateTodo from './components/todos/UpdateTodo';
+import UpdateUser from './containers/users/UpdateUser';
 import ViewTodo from './components/todos/ViewTodo';
 
 
@@ -13,7 +13,7 @@ const routes = (
 		<IndexRoute component={Home}/>
 		<Route path="/adduser" component={AddUser}/>
 		<Route path="/viewTodo/:id" component={ViewTodo}/>
-		<Route path="/updatetodo/:id" component={UpdateTodo}/>
+		<Route path="/updateuser/:id" component={UpdateUser}/>
 	</Route>
 )
 export default routes

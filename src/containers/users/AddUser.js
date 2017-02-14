@@ -2,18 +2,21 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import {  withRouter } from 'react-router';
-import { MyInput, MyTextarea, SimpleMap
+import { MyInput, MyTextarea, SimpleMap, MySelect
 } from '../../components/MyComponents'; 
 import ImageUpload  from '../../components/ImageUpload';
-import SelectBox from '../../components/SelectBox';
 import './user.css';
 
 
 class AddUser extends Component {
   
+     constructor(props){
+       super(props)
+       this.state={racisOptions:['R', 'A', 'C', 'I', 'S' ]}
+     }
      
   componentDidMount(){
-    
+    this.props.loadracis();
   }
    
   static contexTypes = {
@@ -54,7 +57,9 @@ class AddUser extends Component {
 		}
   }
   render() {
+    // console.log('values en this.props ',this.props);
     const { handleSubmit, pristine, reset, submitting }= this.props;
+    const racisOptions=['R', 'A', 'C', 'I', 'S' ];
     return (      
       <div>
         {/* <div className="breadcrumb">
@@ -77,7 +82,7 @@ class AddUser extends Component {
               onMapClick={this.handleMapClick}
               onMarkerClick={this.handleMarkerClick}
             />
-            <Field name='racis' component={SelectBox} />            
+            <Field name='racis' component={MySelect} options={racisOptions}  />            
           <br/>
           <div>
             <button className='pure-button pure-button-primary' type='submit' disabled={submitting}>Submit</button>
