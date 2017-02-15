@@ -14,14 +14,3 @@ function userReducer(state=[], action){
 }
 
 export default userReducer;
-
-// function userReducer(state=initialState, action){
-// 	switch(action.type){
-// 		case GET_USER_SUCCEEDED:
-// 			console.log(action);
-// 			return state.set('users': action.result);
-// 			// return action.result
-// 		default:
-// 			return state;
-// 	}
-// }

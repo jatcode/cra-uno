@@ -1,7 +1,9 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import { browserHistory } from 'react-router';
 import * as type from './constants'
-import { apiGetRacis, apiGetAllUsers, apiCreateUser } from '../../services/UsersApi';
+import { apiGetRacis, apiGetAllUsers, 
+          apiCreateUser, apiGetSingleUser,
+          apiDeleteUser, apiUpdateUser } from '../../services/UsersApi';
 
 
 //GET_RACIS
@@ -49,21 +51,87 @@ function* createUser(feathersApp,action){
     }
   } catch (error) {
     console.log('ON CreateUser Saga Error ',error);
-    //  yield put({type:type.CREATE_USER_FAILED,error})
   } 
 }
 export function* createUserSaga(feathersApp){
   yield takeLatest(type.CREATE_USER,createUser,feathersApp);
 }
 
+//GET SINGLE_USER
+function* getSingleUser(feathersApp,{idUser}){
+    const result = yield call(apiGetSingleUser, feathersApp, idUser);
+    yield put({type: type.GET_SINGLE_USER_SUCCEEDED, result});
+}
+export function* getSingleUserSaga(feathersApp) {
+  yield takeEvery(type.GET_SINGLE_USER, getSingleUser, feathersApp);
+}
 
-// //DELETE_USER
+//DELETE_USER
+function* deleteUser(feathersApp,{idUser}){
+  try {
+		const {code, ...data } = yield call(apiDeleteUser,feathersApp, idUser)
+		if(code){
+			// console.log('codigo,,, ',code);
+			var {response:{error, statusText}} = data;
+			console.log('response: ',data);
+			console.log('statusTEXT: ',statusText);
+			console.log('response.ERROR.NAME: ',error.name);
+			console.log('response.ERROR.MESSAGE: ',error.message);
+			yield put({type:type.DELETE_USER_FAILED,error}) 
+		} else{
+			// console.log('data: ',data);
+			yield put({type:type.DELETE_USER_SUCCEEDED,data});
+			yield browserHistory.push(`/`);
+			yield put({type:type.GET_USERS});
+		}
+  } catch (error) {
+    console.log('something else happened on delete: ',error);
+     yield put({type:type.DELETE_USER_FAILED,error})
+  } 
+  
+}
 
-// function* deleteTodoSaga(feathersApp){
-//   yield takeLatest('DELETE_TODO',deleteTodo,feathersApp);
-// }
+export function* deleteUserSaga(feathersApp){
+  yield takeLatest(type.DELETE_USER,deleteUser,feathersApp);
+}
+
+//UPDATE_USER
+function* updateUser(feathersApp,action){
+  try {
+    const {code, ...data } = yield call(apiUpdateUser,feathersApp, action.payload)
+		if(code){
+			// console.log('codigo,,, ',code);
+			var {response:{error, statusText}} = data;
+			console.log('response: ',data);
+			console.log('statusTEXT: ',statusText);
+			console.log('response.ERROR.NAME: ',error.name);
+			console.log('response.ERROR.MESSAGE: ',error.message);
+		}else{
+			console.log('this is the resp ',data);
+			yield put({type:type.UPDATE_USER_SUCCEEDED,data});
+			yield browserHistory.push(`/`);
+			yield put({type:type.GET_USERS});
+		}
+  } catch (error) {
+    console.log('Something else happened on update ',error);
+     yield put({type:type.UPDATE_USER_FAILED,error})
+  } 
+}
+export function* updateUserSaga(feathersApp){
+  yield takeLatest(type.UPDATE_USER,updateUser,feathersApp);
+}
 
 
+//LOAD_FORM
+function* LoadForm(feathersApp,{idUser}){
+    const result = yield call(apiGetSingleUser, feathersApp, idUser);
+    yield put({type: "LOAD_FORM_SUCCEEDED", result});
+  
+}
+
+export function* loadFormSaga(feathersApp) {
+	yield takeEvery("LOAD_FORM", LoadForm, feathersApp);
+}
 
 /**
  * call also supports invoking object methods, 

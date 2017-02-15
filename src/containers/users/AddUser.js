@@ -30,8 +30,8 @@ class AddUser extends Component {
   }
   handleMarkerClick(e) {
     const { lat, lng } =e.latLng.toJSON();
-    this.props.change('latitude',lat);
-    this.props.change('longitude',lng);
+    this.props.change('geoLocation.latitude',lat);
+    this.props.change('geoLocation.longitude',lng);
   }
   
   handleImage(e){
@@ -44,8 +44,6 @@ class AddUser extends Component {
     
   }
   submit(values){    
-		// console.log('values en submit ',values);
-		// console.log('values en this.props ',this.props);
 		try{
 			this.props.createUser(values);
 		}catch(e){
@@ -57,21 +55,17 @@ class AddUser extends Component {
 		}
   }
   render() {
-    // console.log('values en this.props ',this.props);
     const { handleSubmit, pristine, reset, submitting }= this.props;
     const racisOptions=['R', 'A', 'C', 'I', 'S' ];
     return (      
       <div>
-        {/* <div className="breadcrumb">
-          <h3>Add User</h3>
-        </div> */}
         <form  className="pure-form pure-form-stacked contenedor" onSubmit={handleSubmit(this.submit.bind(this))}>
           <div className="column left">
             <span className="mheader">Profile Settings</span>
             <Field name='picture'  component={ImageUpload} onChange={this.handleImage} />
             <Field name='roleName' component={MyInput} />
-            <Field name='latitude' component={MyInput} />
-            <Field name='longitude' component={MyInput} />
+            <Field name='geoLocation.latitude' component={MyInput} />
+            <Field name='geoLocation.longitude' component={MyInput} />
             <SimpleMap 
               containerElement={
                 <div style={{ height: `300px` }} ></div>

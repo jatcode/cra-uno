@@ -1,9 +1,5 @@
 export function apiGetAllUsers(feathersApp){  
-  const userService = feathersApp.service('users');
-  // console.log('this.Model',this.Model);
-  // console.log('this',this);
-  // console.log('userService',userService);
-  
+  const userService = feathersApp.service('users');  
   return userService
     .find({})
     .then((value) => {
@@ -50,14 +46,13 @@ export function apiCreateUser(feathersApp,formValues){
       description,
       roleName,
       racis,
-      longitude,
-      latitude
+      geoLocation
   }] = formValues;  
   const userService = feathersApp.service('users');
   return userService.create({
     firstName, lastName, email, username,password:" ",
     description, roleName, racis, picture,  
-    geoLocation:{latitude, longitude}})
+    geoLocation})
     .then((value) => {
       // console.log('User created ->data en API',value);
       return value;
@@ -79,9 +74,26 @@ export function apiDeleteUser(feathersApp,idUser){
       return err;
     })
 }  
-export function apiUpdateUser(feathersApp,idUser,todo, description){
+export function apiUpdateUser(feathersApp,formValues){
+  var [{
+      _id,
+      firstName,
+      lastName,
+      email,
+      picture="default.jpg",
+      username,
+      description,
+      roleName,
+      racis,
+      geoLocation
+      // longitude,
+      // latitude
+  }] = formValues;  
   const userService = feathersApp.service('users');
-  return userService.patch(idUser, {todo, description})
+  return userService.patch(_id, {
+    firstName, lastName, email, username,password:" ",
+    description, roleName, racis, picture,  
+    geoLocation})
     .then((value) => {
       // console.log('data en UPDATE API',value);
       return value;

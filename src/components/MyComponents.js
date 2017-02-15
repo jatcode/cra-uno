@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Message } from 'semantic-ui-react';
 import { Field } from 'redux-form'
 import { startCase, toLower } from 'lodash/string'
 import { withGoogleMap, Marker, GoogleMap } from "react-google-maps";
@@ -63,9 +62,9 @@ export function MyFileInput({input, meta: { touched, error }, ...custom}) {
 export function MySelect({options}){
   return (
     <select >
-      <option disabled="" value="">Select a racis...</option>
-      {options.map((option, i)=>
-        <option key={i}>{option}</option>
+      <option value="">Select a racis...</option>
+      {options.map(option=>
+        <option value={option} key={option}>{option}</option>
       )}
     </select>
   );
@@ -87,6 +86,7 @@ export  const GettingStartedGoogleMap = withGoogleMap(props => (
   ));
 export const SimpleMap= withGoogleMap(props =>(
   <GoogleMap
+    
     defaultZoom={8}
     defaultCenter={{lat:13.66191391961704,lng:-89.25284385681152}}
     onClick={props.onMapClick}
@@ -105,7 +105,7 @@ export const SingleListItem= (
   {_id, firstName, lastName, description, email, 
     picture, racis='T',roleName,geoLocation:{longitude,latitude}},i)=>
   <div key={i}>
-     <a href={_id}  onClick={() => browserHistory.push(`/updateUser/${_id}`)}><h3>{firstName} {lastName}</h3></a> 
+     <a href={_id}  onClick={() => browserHistory.push(`/viewuser/${_id}`)}><h3>{firstName} {lastName}</h3></a> 
      <em>{email}-{picture}</em>
      <br></br>
      <span>

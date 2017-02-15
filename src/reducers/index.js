@@ -3,11 +3,12 @@ import { routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
 // import  mytodos  from './todos-reducer';
 // import  currTodo  from './currTodo';
-import  formLoader  from './formReducer';
+import  currUser from '../containers/users/currUser_reducer'
+import  formLoader  from '../containers/users/formLoader_reducer';
 import  userReducer from '../containers/users/reducer'
 const todoApp = combineReducers({
  // mytodos,
- // currTodo,
+ currUser,
  users: userReducer,
  form: formReducer, 
  formLoader,
