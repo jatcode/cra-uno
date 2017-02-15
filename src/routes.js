@@ -7,7 +7,6 @@ import UpdateUser from './containers/users/UpdateUser';
 import ViewUser from './containers/users/ViewUser';
 
 
-
 const routes = (
 	<Route path='/' component={App}>
 		<IndexRoute component={Home}/>

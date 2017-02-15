@@ -1,6 +1,5 @@
 import React from 'react';
-// eslint-disable-next-line
-import { Router, Route, IndexRoute ,browserHistory } from 'react-router';
+import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux'
