@@ -87,10 +87,12 @@ class UpdateUser extends Component {
 }
 
 const validate = values=>{
-  const {todo, description} = values;
+  const {firstName, lastName, email, username } = values;
   const errors ={};
-  if(!todo || todo.trim() ===''){errors.todo= 'todo is required'};
-  if(!description || description.trim() ===''){errors.description= 'description is required'};
+  if(!firstName || firstName.trim() ===''){errors.firstName= 'firstName is required'};
+  if(!lastName || lastName.trim() ===''){errors.lastName= 'lastName is required'};
+  if(!email || email.trim() ===''){errors.email= 'email is required'};
+  if(!username || username.trim() ===''){errors.username= 'username is required'};
   return errors
 }
 
