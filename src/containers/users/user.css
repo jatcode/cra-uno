@@ -1,0 +1,142 @@
+
+.box{
+	color: white;
+	font-size: 30px;
+	text-align: center;
+	text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+	padding: 10px;
+}
+
+.box1 { background: #1abc9c}
+.box2 { background: #3498db}
+.box3 { background: #9b59b6}
+.box4 { background: #34495e}
+.box5 { background: #f1c40f}
+.box6 { background: #e67e22}
+.box7 { background: #e74c3c}
+.box8 { background: #bdc3c7}
+.box9 { background: #2ecc71}
+.box10 { background: #16a085}
+
+.box{
+}
+.contenedor{
+	display:flex;
+	border: 10px solid mistyrose;
+	background: #E9EAED
+}
+
+.column{
+	display: flex;
+	flex-direction: column;
+	border: 5px solid grey;
+	/*padding: 4px;*/
+	/*margin: 0 1em 0 1em;*/
+}
+
+.right{
+	flex: 2;
+	/*background: white;*/
+	/*padding: 0px;*/
+	/*margin: 0 1em 0 1em;*/
+	/*width: 33.333%;*/
+	/*order: 2		*/
+}
+	
+.left{
+}
+
+.formContainer{
+	display: flex;
+	flex-direction: column;
+}
+.formItem{
+	/*flex: 1;*/
+}
+.breadcrumb{
+	position: relative;
+	left: 50%;
+	font-weight: bold;
+	/*background: blue;*/
+}
+.formrow{
+	/*display: flex;*/
+	/*flex-flow: row;*/
+	/*padding: 0 15px -15px 0;*/
+}
+
+
+.mheader{
+	color: white;
+	background: #424242;
+	max-height: 40px;
+	
+}
+	
+/*.contenedor{
+	display: flex;
+	border: 10px solid mistyrose;
+	height: 100vh;
+	align-items: flex-end;
+}
+.box{
+	width: 33.333%;
+}
+
+.box2{
+	padding-bottom: 200px;
+}
+.box6{
+	padding-bottom: 0;
+	align-self: stretch;
+}
+.box9{
+	padding-bottom: 50px;
+}*/
+
+
+/*.contenedor{
+	display: flex;
+	border: 10px solid mistyrose;
+	height: 100vh;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;;
+}
+.box{
+	width: 33.333%;
+	min-height: 10vh;
+}*/
+
+/*.contenedor{
+	display: flex;
+	border: 10px solid mistyrose;
+	align-items: baseline;
+	height: 100vh;
+}
+.box10{
+	font-size: 20px;
+}*/
+/*.contenedor{
+	display: flex;
+	justify-content:center;
+	border: 10px solid mistyrose;
+	flex-direction: column;
+	min-height: 100vh;
+}*/
+
+/*.contenedor{*/
+	/*display: flex;*/
+	/*border:10px solid goldenrod;*/
+	/*min-height:100vh;*/
+	/*flex-wrap:wrap;*/
+	/*flex-direction:column;*/
+/*}*/
+/*.box{
+	flex: 1;
+}*/
+/*.box{
+	width:33.3333333%;
+	padding: 10px;
+	border:10px solid mistyrose;
+}*/
