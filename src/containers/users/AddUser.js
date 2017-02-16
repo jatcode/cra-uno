@@ -2,10 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import {  withRouter } from 'react-router';
-import { MyInput, MyTextarea, SimpleMap, MySelect
+import { MyInput, MyTextarea, SimpleMap, MySelect, MyFileInput
 } from '../../components/MyComponents'; 
 import ImageUpload  from '../../components/ImageUpload';
-import './user.css';
 
 
 class AddUser extends Component {
@@ -13,6 +12,7 @@ class AddUser extends Component {
      constructor(props){
        super(props)
        this.state={racisOptions:['R', 'A', 'C', 'I', 'S' ]}
+      //  this.handleImage = this.handleImage.bind(this);
      }
      
   componentDidMount(){
@@ -34,13 +34,17 @@ class AddUser extends Component {
     this.props.change('geoLocation.longitude',lng);
   }
   
-  handleImage(e){
-    e.preventDefault();
+  handleImage(e,...imagepreview){
+    // e.preventDefault();
     // let reader= new FileReader();
     // let file= e.target.files[0];
     // reader.onloadend = ()=>{
     //   
     // }
+    // this.props.change('picture',)
+    console.log('this.props en padre',this.props);
+    console.log('What in e en padre',e);
+    console.log('What in imagepreview en padre',imagepreview);
     
   }
   submit(values){    
@@ -62,7 +66,8 @@ class AddUser extends Component {
         <form  className="pure-form pure-form-stacked contenedor" onSubmit={handleSubmit(this.submit.bind(this))}>
           <div className="column left">
             <span className="mheader">Profile Settings</span>
-            <Field name='picture'  component={ImageUpload} onChange={this.handleImage} />
+            <Field name='picture'  component={ImageUpload} myFunc={this.handleImage.bind(this)}  />
+            {/* <Field name='poster'  type="file" component={MyFileInput}  /> */}
             <Field name='roleName' component={MyInput} />
             <Field name='geoLocation.latitude' component={MyInput}  disabled="true" />
             <Field name='geoLocation.longitude' component={MyInput} />

@@ -1,3 +1,9 @@
+.message{
+	background: #EF9A9A;
+	color: darkolivegreen;
+	font-weight: 700;
+	font-style: oblique;
+}
 
 .box{
 	color: white;

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Field } from 'redux-form'
 import { startCase, toLower } from 'lodash/string'
@@ -33,7 +33,9 @@ export function MyInput({input, meta: { touched, error }, ...custom}) {
       <div className="formContainer">
         <label >{initialCapitalCase(input.name)}</label>
         <input className="formItem" {...input} />
-        {hasError && <Message error header='Error' content={error} />}
+        {/* {hasError && <Message error header='Error' content={error} />} */}
+        {/* {hasError && <span>{error}</span> } */}
+        {hasError && <MyMessage message={error} />}
       </div>
   );
 }
@@ -47,17 +49,27 @@ export function MyTextarea({input, meta: { touched, error }, ...custom}) {
       </div>
   );
 }
-export function MyFileInput({input, meta: { touched, error }, ...custom}) {
-    const hasError = touched && error;
-    return (
-      <div className="formItem">
-        <label >{initialCapitalCase(input.name)}</label>
-        <div>          
-          <input {...input}  type="file" value={ `undefined` }/>
-          {hasError && <Message error header='Error' content={error} />}
-        </div>
-      </div>
-    );
+export function MyMessage(props){
+  const { children, message } = props;
+  return (
+    <span className='message'>{message}</span>
+  );
+}
+export class MyFileInput extends Component {
+    constructor(props){
+      super(props);
+      this.onChange = this.onChange.bind(this);
+    }
+    onChange(e){
+      const { input:{ onChange } }= this.props;
+      onChange(e.target.files[0]);
+    }
+    render(){
+      const { input: { value }} = this.props
+      return(
+        <input type="file" value={value} onChange={this.onChange} />
+      );
+    }
   }
 export function MySelect({options}){
   return (
@@ -103,16 +115,18 @@ export const SimpleMap= withGoogleMap(props =>(
 
 export const SingleListItem= (
   {_id, firstName, lastName, description, email, 
-    picture, racis='T',roleName,geoLocation:{longitude,latitude}},i)=>
+    picture, racis='T',roleName,geoLocation:{longitude,latitude}},i,myFunc)=>
   <div key={i}>
-     <a href={_id}  onClick={() => browserHistory.push(`/viewuser/${_id}`)}><h3>{firstName} {lastName}</h3></a> 
-     <em>{email}-{picture}</em>
-     <br></br>
-     <span>
-       Lat={latitude}, Long={longitude}
-       <br></br>
-       <a href="#" >{racis}</a>
-     </span>
+     <a href={`/viewuser/${_id}`}  onClick={(e)=>myFunc(e, _id)}>
+      <h3>{firstName} {lastName}</h3>
+    </a> 
+    <em>{email}-{picture}</em>
+    <br></br>
+    <span>
+      Lat={latitude}, Long={longitude}
+      <br></br>
+      <a href="#" >{racis}</a>
+    </span>
   </div>
   export function FlexComponent(){
     return (
