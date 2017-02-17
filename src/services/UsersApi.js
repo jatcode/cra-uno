@@ -48,13 +48,14 @@ export function apiCreateUser(feathersApp,formValues){
       racis,
       geoLocation
   }] = formValues;  
+  // console.log('picture ',picture);
   const userService = feathersApp.service('users');
   return userService.create({
     firstName, lastName, email, username,password:" ",
     description, roleName, racis, picture,  
     geoLocation})
     .then((value) => {
-      // console.log('User created ->data en API',value);
+      console.log('User created ->data en API',value);
       return value;
     })
     .catch((err) => {

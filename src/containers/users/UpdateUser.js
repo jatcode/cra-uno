@@ -10,6 +10,7 @@ class UpdateUser extends Component {
 	 componentDidMount() {
 		 console.log('Updating...',this.props.params.id);
     this.props.loadFormUser(this.props.params.id)
+    console.log('after loadFormUser(), ',this.props);
 	 }
 	 
   static contexTypes = {
@@ -18,13 +19,23 @@ class UpdateUser extends Component {
   
   handleMapClick = this.handleMapClick.bind(this);
   handleMarkerClick = this.handleMarkerClick.bind(this);
+  
   handleMapClick(e) {
     // console.log('just local PROPS,',e);
   }
+  
   handleMarkerClick(e) {
     const { lat, lng } =e.latLng.toJSON();
     this.props.change('geoLocation.latitude',lat);
     this.props.change('geoLocation.longitude',lng);
+  }
+  
+  
+  handleImage(data){
+    console.log('this.props en padre',this.props);
+    // console.log('What in e en padre',e);
+    console.log('What in data en padre',data);
+    this.props.change('picture',data.imagePreviewUrl);
   }
   
   submit(values){    
@@ -46,7 +57,7 @@ class UpdateUser extends Component {
         <form  className="pure-form pure-form-stacked contenedor" onSubmit={handleSubmit(this.submit.bind(this))}>
           <div className="column left">
             <span className="mheader">Profile Settings</span>
-            <Field name='picture'  component={ImageUpload} onChange={this.handleImage} />
+            <Field name='picture'  component={ImageUpload} myFunc={this.handleImage.bind(this)} />
             <Field name='roleName' component={MyInput} />
             <Field name='geoLocation.latitude' component={MyInput} />
             <Field name='geoLocation.longitude' component={MyInput} />

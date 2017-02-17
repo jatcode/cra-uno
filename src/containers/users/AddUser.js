@@ -34,17 +34,12 @@ class AddUser extends Component {
     this.props.change('geoLocation.longitude',lng);
   }
   
-  handleImage(e,...imagepreview){
-    // e.preventDefault();
-    // let reader= new FileReader();
-    // let file= e.target.files[0];
-    // reader.onloadend = ()=>{
-    //   
-    // }
-    // this.props.change('picture',)
+  handleImage(data){
+  
     console.log('this.props en padre',this.props);
-    console.log('What in e en padre',e);
-    console.log('What in imagepreview en padre',imagepreview);
+    // console.log('What in e en padre',e);
+    console.log('What in data en padre',data);
+    this.props.change('picture',data.imagePreviewUrl);
     
   }
   submit(values){    
@@ -67,19 +62,14 @@ class AddUser extends Component {
           <div className="column left">
             <span className="mheader">Profile Settings</span>
             <Field name='picture'  component={ImageUpload} myFunc={this.handleImage.bind(this)}  />
-            {/* <Field name='poster'  type="file" component={MyFileInput}  /> */}
             <Field name='roleName' component={MyInput} />
             <Field name='geoLocation.latitude' component={MyInput}  disabled="true" />
             <Field name='geoLocation.longitude' component={MyInput} />
             <SimpleMap 
-              containerElement={
-                <div style={{ height: `300px` }} ></div>
-              }
-              mapElement={
-                <div style={{ height: `100%` }} ></div>
-              }
-              onMapClick={this.handleMapClick}
-              onMarkerClick={this.handleMarkerClick}
+                  containerElement={ <div style={{ height: `300px` }} ></div> }
+                  mapElement={ <div style={{ height: `100%` }} ></div> }
+                  onMapClick={this.handleMapClick}
+                  onMarkerClick={this.handleMarkerClick}
             />
             <Field name='racis' component={MySelect} options={racisOptions}  />            
           <br/>
@@ -92,7 +82,7 @@ class AddUser extends Component {
             <span className="mheader">Personal Details</span>
             <Field name='firstName' component={MyInput} />
             <Field name='lastName' component={MyInput} />
-            <Field name='email' component={MyInput} />
+            <Field name='email' component={MyInput} type="email" />
             <Field name='username' component={MyInput} />
             <Field name='description' component={MyTextarea} />              
           </div>

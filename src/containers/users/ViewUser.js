@@ -5,9 +5,9 @@ export default class ViewUser extends Component {
 	
 	componentDidMount() {
 		this.props.getSingleUser(this.props.params.id);
+		// console.log('Viewing...',this.props.params.id);
 	}
 	onEditUserClick(){
-		console.log('Viewing...',this.props.params.id);
 		browserHistory.push(`/updateuser/${this.props.params.id}`);
   }
 	onDeletePostClick(){

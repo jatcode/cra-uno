@@ -6,19 +6,32 @@ class ImageUpload extends Component {
     super(props);
     this.state = {file: '',imagePreviewUrl: ''};
   }
-
-  _handleSubmit(e) {
-    e.preventDefault();
-    // TODO: do something with -> this.state.file
-    console.log('handle uploading-', this.state.file);
-    console.log('handle uploading-', this.state);
+  
+  componentDidMount(){
+    console.log(this.props)
+    console.log(this.props.input)
+    console.log(this.props.input.name)
+    console.log(this.props.input.value)
+    const { input:{ name, value } } = this.props;
+    console.log(name)
+    console.log(value)
+    
+    if(value!=='default.jpg'){
+      console.log('inputValue',value);
+      console.log('inputName',name);
+      // console.log('input',input);
+    }else{
+      console.log('negativoinput.value',value);
+      console.log('negativoinput.name',name);
+        
+    }
   }
-  habla(e, imagePreview){
+  
+  habla(e, localState){
     e.preventDefault();
     console.log('e ',e);
-    console.log('props',this.props);
-    console.log('imagePreview en hijo',imagePreview)
-    return this.props.myFunc(imagePreview);
+    console.log('localState en hijo',localState)
+    return this.props.myFunc(localState);
   }
   _handleImageChange(e) {
     e.preventDefault();
@@ -44,11 +57,8 @@ class ImageUpload extends Component {
     }
     return (
       <div className="previewComponent">
-        {/* <form  className="pure-form pure-form-stacked" onSubmit={(e)=>this._handleSubmit(e)}> */}
           <input   type="file" onChange={(e)=>this._handleImageChange(e)} />
-          {/* <button className="pure-button pure-button-primary" type="submit" onClick={(e)=>this._handleSubmit(e)}>Upload Image</button> */}
-          <button className="pure-button pure-button-primary" onClick={(e)=>this.habla(e,$imagePreview)}>Habla Image</button>
-        {/* </form> */}
+          <button className="pure-button pure-button-primary" onClick={(e)=>this.habla(e,this.state)}>Habla Image</button>
         <div className="imgPreview">
           {$imagePreview}
         </div>
@@ -58,3 +68,26 @@ class ImageUpload extends Component {
 }
   
 export default ImageUpload;
+
+
+// _handleSubmit(e) {
+//   e.preventDefault();
+//   // TODO: do something with -> this.state.file
+//   console.log('handle uploading-', this.state.file);
+//   console.log('handle uploading-', this.state);
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
