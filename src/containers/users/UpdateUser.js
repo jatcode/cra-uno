@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { MyInput, MyTextarea, SimpleMap } from '../../components/MyComponents';
 import ImageUpload  from '../../components/ImageUpload';        
- 
+import MyUpload  from '../../components/MyUpload'
+
 
 class UpdateUser extends Component {   
    
@@ -37,7 +38,12 @@ class UpdateUser extends Component {
     console.log('What in data en padre',data);
     this.props.change('picture',data.imagePreviewUrl);
   }
-  
+
+  handleMyUpload(data){
+    console.log('data en MYUPLOAD',data);
+    this.props.change('picture',data.preview);
+  }
+    
   submit(values){    
 		try{
 			this.props.updateUser(values);
@@ -57,7 +63,8 @@ class UpdateUser extends Component {
         <form  className="pure-form pure-form-stacked contenedor" onSubmit={handleSubmit(this.submit.bind(this))}>
           <div className="column left">
             <span className="mheader">Profile Settings</span>
-            <Field name='picture'  component={ImageUpload} myFunc={this.handleImage.bind(this)} />
+            {/* <Field name='picture'  component={ImageUpload} myFunc={this.handleImage.bind(this)} /> */}
+                        <Field name='picture' component={ MyUpload } reload={true} func={this.handleMyUpload.bind(this)}/>
             <Field name='roleName' component={MyInput} />
             <Field name='geoLocation.latitude' component={MyInput} />
             <Field name='geoLocation.longitude' component={MyInput} />

@@ -38,7 +38,7 @@ function* createUser(feathersApp,action){
   try {
     const result = yield call(apiCreateUser,feathersApp, action.payload)
     const {_id} = result;
-    if(_id && Object.keys(result).length ===0){
+    if(_id && Object.keys(result).length !==0){
       console.log("this is the id CREATED,",_id)
       console.log('LLAVES QUE TIENE EL OBJECTO',Object.keys(result).length);
       yield put({type:type.CREATE_USER_SUCCEEDED,result});

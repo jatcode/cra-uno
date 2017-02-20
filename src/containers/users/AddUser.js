@@ -5,16 +5,10 @@ import {  withRouter } from 'react-router';
 import { MyInput, MyTextarea, SimpleMap, MySelect, MyFileInput
 } from '../../components/MyComponents'; 
 import ImageUpload  from '../../components/ImageUpload';
-
+import MyUpload  from '../../components/MyUpload'
 
 class AddUser extends Component {
-  
-     constructor(props){
-       super(props)
-       this.state={racisOptions:['R', 'A', 'C', 'I', 'S' ]}
-      //  this.handleImage = this.handleImage.bind(this);
-     }
-     
+       
   componentDidMount(){
     this.props.loadracis();
   }
@@ -23,11 +17,7 @@ class AddUser extends Component {
     router : PropTypes.object
   };
   
-  handleMapClick = this.handleMapClick.bind(this);
   handleMarkerClick = this.handleMarkerClick.bind(this);
-  handleMapClick(e) {
-    // console.log('just local PROPS,',e);
-  }
   handleMarkerClick(e) {
     const { lat, lng } =e.latLng.toJSON();
     this.props.change('geoLocation.latitude',lat);
@@ -35,13 +25,16 @@ class AddUser extends Component {
   }
   
   handleImage(data){
-  
     console.log('this.props en padre',this.props);
-    // console.log('What in e en padre',e);
     console.log('What in data en padre',data);
     this.props.change('picture',data.imagePreviewUrl);
-    
   }
+  
+  handleMyUpload(data){
+    console.log('data en MYUPLOAD',data);
+    this.props.change('picture',data.preview);
+  }
+
   submit(values){    
 		try{
 			this.props.createUser(values);
@@ -61,7 +54,8 @@ class AddUser extends Component {
         <form  className="pure-form pure-form-stacked contenedor" onSubmit={handleSubmit(this.submit.bind(this))}>
           <div className="column left">
             <span className="mheader">Profile Settings</span>
-            <Field name='picture'  component={ImageUpload} myFunc={this.handleImage.bind(this)}  />
+            {/* <Field name='picture'  component={ImageUpload} myFunc={this.handleImage.bind(this)}  /> */}
+            <Field name='picture' component={ MyUpload } func={this.handleMyUpload.bind(this)}/>
             <Field name='roleName' component={MyInput} />
             <Field name='geoLocation.latitude' component={MyInput}  disabled="true" />
             <Field name='geoLocation.longitude' component={MyInput} />
@@ -72,11 +66,11 @@ class AddUser extends Component {
                   onMarkerClick={this.handleMarkerClick}
             />
             <Field name='racis' component={MySelect} options={racisOptions}  />            
-          <br/>
-          <div>
-            <button className='pure-button pure-button-primary' type='submit' disabled={submitting}>Submit</button>
-            <button className='pure-button ' type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
-          </div>
+            <br/>
+            <div>
+              <button className='pure-button pure-button-primary' type='submit' disabled={submitting}>Submit</button>
+              <button className='pure-button ' type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+            </div>
           </div>
           <div className="column right">
             <span className="mheader">Personal Details</span>
@@ -86,6 +80,7 @@ class AddUser extends Component {
             <Field name='username' component={MyInput} />
             <Field name='description' component={MyTextarea} />              
           </div>
+            
         </form>
       </div>
     );

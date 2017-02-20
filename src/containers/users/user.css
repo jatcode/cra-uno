@@ -5,6 +5,17 @@
 	font-style: oblique;
 }
 
+.img{
+	border: 0px solid #FFF;
+	border-style: none;
+	margin: auto;
+	cursor: pointer;
+	width:200px;
+	height:200px;
+	max-width: 400px;
+	max-height: 400px;
+}
+
 .box{
 	color: white;
 	font-size: 30px;
