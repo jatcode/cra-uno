@@ -117,9 +117,12 @@ export const SingleListItem= (
   {_id, firstName, lastName, description, email, 
     picture, racis='T',roleName,geoLocation:{longitude,latitude}},i,myFunc)=>
   <div key={i}>
-     <a href={`/viewuser/${_id}`}  onClick={(e)=>myFunc(e, _id)}>
+    <img src={picture} onClick={(e)=>myFunc(e, _id)} ></img>
       <h3>{firstName} {lastName}</h3>
-    </a> 
+      <p>{description}</p>
+    
+     {/* <a href={`/viewuser/${_id}`}  onClick={(e)=>myFunc(e, _id)}>
+    </a>  */}
     <em>{email}-{picture}</em>
     <br></br>
     <span>
@@ -128,19 +131,4 @@ export const SingleListItem= (
       <a href="#" >{racis}</a>
     </span>
   </div>
-  export function FlexComponent(){
-    return (
-      <div className="contenedor">
-        <div className="box box1">1</div>
-        <div className="box box2">2</div>
-        <div className="box box3">3</div>
-        <div className="box box4">4</div>
-        <div className="box box5">5</div>
-        <div className="box box6">6</div>
-        <div className="box box7">7</div>
-        <div className="box box8">8</div>
-        <div className="box box9">9</div>
-        <div className="box box10">10</div>
-      </div>
-    );
-  }
+  
