@@ -1,4 +1,5 @@
 /** {margin: 0; padding: 0;}
+/** {margin: 0; padding: 0;}
 
 div {
   margin: 20px;
@@ -32,23 +33,45 @@ li:hover {
   cursor: pointer;
 }*/
 
-https://css-tricks.com/yay-for-hsla/
+.mycarbody{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #404040;
+	font-size: 14px;
+	font-weight: 300;
+	line-height: 22px;
+	letter-spacing: .4px;
+	/*background: #eee;*/
+	padding-top: 30px;
+}
+
+.mycard {
+	display: inline-block;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,.15);
+  margin: 20px;
+  position: relative;
+  margin-bottom: 50px;
+  transition: all .2s ease-in-out;
+}
+
+.mycard:hover {
+  /*box-shadow: 0 5px 22px 0 rgba(0,0,0,.25);*/
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  margin-bottom: 54px;
+}
+/*https://css-tricks.com/yay-for-hsla/
 http://www.cssportal.com/layout-generator/layout.php
 https://coolors.co/721514-792a2a-8e6665-978080-a3a3a3
 https://yui.github.io/skinbuilder/?mode=pure
 http://paletton.com/#uid=23+050kaXg46hgu8vgcdBg0hfgn
-https://www.canva.com/color-palette/
+https://www.canva.com/color-palette/*/
 
 
-.imagen{ 
-	
-}
-.message{
+/*.message{
 	background: #EF9A9A;
 	color: darkolivegreen;
 	font-weight: 700;
 	font-style: oblique;
-}
+}*/
 
 .img{
 	border: 0px solid #FFF;
@@ -61,15 +84,54 @@ https://www.canva.com/color-palette/
 	max-height: 400px;
 }
 
-.box{
+	.myimage {
+	border: 1px solid grey;
+  height: 200px;
+  opacity: .7;
+  overflow: hidden;
+  transition: all .2s ease-in-out;
+}
+.myimage:hover,
+.mycard:hover .image {
+  height: 200px;
+  opacity: 1;
+}
+
+
+
+.button-success,
+.button-error,
+.button-warning,
+.button-secondary {
+	color: white;
+	border-radius: 4px;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+	}
+
+.button-success {
+	background: rgb(28, 184, 65); /* this is a green */
+}
+
+.button-error {
+	background: rgb(202, 60, 60); /* this is a maroon */
+}
+
+.button-warning {
+	background: rgb(223, 117, 20); /* this is an orange */
+}
+
+.button-secondary {
+	background: rgb(66, 184, 221); /* this is a light blue */
+}
+/*.box{
 	color: white;
 	font-size: 30px;
 	text-align: center;
 	text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
 	padding: 10px;
-}
+}*/
 
-.box1 { background: #1abc9c}
+/*.box1 { background: #1abc9c}
 .box2 { background: #3498db}
 .box3 { background: #9b59b6}
 .box4 { background: #34495e}
@@ -81,59 +143,47 @@ https://www.canva.com/color-palette/
 .box10 { background: #16a085}
 
 .box{
-}
-.contenedor{
+}*/
+/*.contenedor{
 	display:flex;
 	border: 10px solid mistyrose;
 	background: #E9EAED
-}
+}*/
 
-.column{
+/*.column{
 	display: flex;
 	flex-direction: column;
 	border: 5px solid grey;
-	/*padding: 4px;*/
-	/*margin: 0 1em 0 1em;*/
-}
+}*/
 
-.right{
+/*.right{
 	flex: 2;
-	/*background: white;*/
-	/*padding: 0px;*/
-	/*margin: 0 1em 0 1em;*/
-	/*width: 33.333%;*/
-	/*order: 2		*/
-}
+}*/
 	
-.left{
-}
+/*.left{
+}*/
 
-.formContainer{
+/*.formContainer{
 	display: flex;
 	flex-direction: column;
-}
-.formItem{
-	/*flex: 1;*/
-}
-.breadcrumb{
+}*/
+/*.formItem{
+}*/
+/*.breadcrumb{
 	position: relative;
 	left: 50%;
 	font-weight: bold;
-	/*background: blue;*/
-}
-.formrow{
-	/*display: flex;*/
-	/*flex-flow: row;*/
-	/*padding: 0 15px -15px 0;*/
-}
+}*/
+/*.formrow{
+}*/
 
 
-.mheader{
+/*.mheader{
 	color: white;
 	background: #424242;
 	max-height: 40px;
 	
-}
+}*/
 	
 /*.contenedor{
 	display: flex;

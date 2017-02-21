@@ -13,8 +13,10 @@ export const MyLink = ({toValue, label}) =>
     </Link>
   </div>
 export const MyLinkItem = ({toValue, label}) =>
-    <Link to={ toValue } className='pure-menu-item pure-menu-link'>
-      {label}
+    <Link to={ toValue } className='pure-menu-item '>
+      <span className='pure-menu-link mylink'>
+        {label}
+      </span>
     </Link>
 export const MenuList = (props) =>
     <div className="pure-menu pure-menu-horizontal">
@@ -115,20 +117,13 @@ export const SimpleMap= withGoogleMap(props =>(
 
 export const SingleListItem= (
   {_id, firstName, lastName, description, email, 
-    picture, racis='T',roleName,geoLocation:{longitude,latitude}},i,myFunc)=>
-  <div key={i}>
-    <img src={picture} onClick={(e)=>myFunc(e, _id)} ></img>
-      <h3>{firstName} {lastName}</h3>
-      <p>{description}</p>
-    
-     {/* <a href={`/viewuser/${_id}`}  onClick={(e)=>myFunc(e, _id)}>
-    </a>  */}
-    <em>{email}-{picture}</em>
-    <br></br>
-    <span>
-      Lat={latitude}, Long={longitude}
-      <br></br>
-      <a href="#" >{racis}</a>
-    </span>
+    picture, racis='T',username,geoLocation:{longitude,latitude}},i,myFunc)=>
+  <div key={i} className="pure-g" onClick={(e)=>myFunc(e, _id)}>
+    <div className=" mycard pure-u-4-5">
+      <img src={picture}  className='myimage' ></img>
+      <h1>{firstName} {lastName}</h1>
+      <em>{username}</em>
+      <em>{email}</em>
+    </div>
   </div>
   

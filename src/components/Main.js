@@ -1,25 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {  MyLinkItem, MenuList } from './MyComponents'
-const Main = React.createClass({
+import { Header, Container } from '../layout/index'
+
+class Main extends Component {
 	render(){
 		return (
 			<div>
-				{/* <Header> */}
-				<MenuList>
+				<Header>
 					<MyLinkItem toValue='/' label='Home'/>
+					<MyLinkItem toValue='/userlist' label='User List'/>
 					<MyLinkItem toValue='/adduser' label='Add User'/>
-				</MenuList>
-				{/* </Header>  */}
-				{/* <Container > */}
+				</Header> 
+				<Container >
 					{/* <Content> */}
 						{React.cloneElement(this.props.children, this.props)}
 					{/* </Content> */}
 					{/* <Footer /> */}
-				{/* </Container> */}
+				</Container>
 				
 			</div>
 		);
 	}
-});
+};
 
 export default Main;
