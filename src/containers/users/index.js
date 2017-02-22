@@ -18,6 +18,9 @@ class User extends Component {
 		const { users } = this.props;
 		// console.log('users ,',users)
 		const handler=this.handleLinkClick.bind(this)
+		if (users === undefined|| users.length < 1 ) {
+		 return (<h2>There are no users</h2>)
+		}
 		return (
 			// <div>
 			// 	{users.map((user, i)=> SingleListItem(user,i,handler))}

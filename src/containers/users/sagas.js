@@ -42,7 +42,7 @@ function* createUser(feathersApp,action){
       console.log("this is the id CREATED,",_id)
       console.log('LLAVES QUE TIENE EL OBJECTO',Object.keys(result).length);
       yield put({type:type.CREATE_USER_SUCCEEDED,result});
-      yield browserHistory.push(`/`);
+      yield browserHistory.push(`/userlist`);
       yield put({type:type.GET_USERS});
     }else{
       console.log("ID VALOR",_id);
@@ -81,7 +81,7 @@ function* deleteUser(feathersApp,{idUser}){
 		} else{
 			// console.log('data: ',data);
 			yield put({type:type.DELETE_USER_SUCCEEDED,data});
-			yield browserHistory.push(`/`);
+			yield browserHistory.push(`/userlist`);
 			yield put({type:type.GET_USERS});
 		}
   } catch (error) {
@@ -109,7 +109,7 @@ function* updateUser(feathersApp,action){
 		}else{
 			console.log('this is the resp ',data);
 			yield put({type:type.UPDATE_USER_SUCCEEDED,data});
-			yield browserHistory.push(`/`);
+			yield browserHistory.push(`/userlist`);
 			yield put({type:type.GET_USERS});
 		}
   } catch (error) {
