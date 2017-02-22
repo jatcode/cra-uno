@@ -6,6 +6,7 @@ import { MyInput, MyTextarea, SimpleMap, MySelect, MyFileInput
 } from '../../components/MyComponents'; 
 import ImageUpload  from '../../components/ImageUpload';
 import MyUpload  from '../../components/MyUpload'
+import { Grid, Card, Icon, Image, Button, Label } from 'semantic-ui-react'
 
 class AddUser extends Component {
        
@@ -52,7 +53,7 @@ class AddUser extends Component {
     return (      
       <div>
         <form  className="pure-form pure-form-stacked contenedor" onSubmit={handleSubmit(this.submit.bind(this))}>
-          <div className="column left">
+          <div className="pure-u-1-5 pure-u-md-1-5 column left mycard">
             <span className="mheader">Profile Settings</span>
             {/* <Field name='picture'  component={ImageUpload} myFunc={this.handleImage.bind(this)}  /> */}
             <Field name='picture' component={ MyUpload } func={this.handleMyUpload.bind(this)}/>
@@ -65,14 +66,19 @@ class AddUser extends Component {
                   onMapClick={this.handleMapClick}
                   onMarkerClick={this.handleMarkerClick}
             />
-            <Field name='racis' component={MySelect} options={racisOptions}  />            
+            <Field name='racis' className='pure-input-1' component='select'  >
+              <option value="">Select a racis...</option>
+              {racisOptions.map(option=>
+                <option value={option} key={option}>{option}</option>
+              )}
+            </Field>            
             <br/>
             <div>
               <button className='pure-button pure-button-primary' type='submit' disabled={submitting}>Submit</button>
               <button className='pure-button ' type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
             </div>
           </div>
-          <div className="column right">
+          <div className="pure-u-4-5 pure-u-md-4-5 column right mycard">
             <span className="mheader">Personal Details</span>
             <Field name='firstName' component={MyInput} />
             <Field name='lastName' component={MyInput} />

@@ -1,5 +1,7 @@
 import React,{Component} from 'react';
 import { browserHistory } from 'react-router';
+import { Card, Icon, Image, Button, Label } from 'semantic-ui-react'
+
 
 export default class ViewUser extends Component {
 	
@@ -25,39 +27,61 @@ export default class ViewUser extends Component {
 					geoLocation
 				} = userItem;
         return (
-	        <div className="mycard pure-g">
-						<button 
-		          className='pure-button button-secondary pure-button-active'
-		          onClick={this.onEditUserClick.bind(this)}
-		          >
-		          Edit User
-		        </button>
-						<button 
-		          className='pure-button button-error'
-		          onClick={this.onDeletePostClick.bind(this)}
-		          >
-		          Delete Todo
-		        </button>
-						
-						<div className='mycarbody pure-u-1 '>
-							<img src={picture} role='presentation' className=' myimage'></img>
-							<fieldset className='pure-group '>
-								<h1>{firstName} {lastName}</h1>
-								<span><h2>Username:</h2>{username} </span>						 
-								<span><h2>Email</h2>{email} </span>						 
-							</fieldset>
-							<fieldset className='pure-group'>
-								<span><h2>RoleName</h2>{roleName} </span>						 
-								<span><h2>RACIS</h2>{racis}</span>						 
-							</fieldset>
-							<fieldset className='pure-group'>
-								<span><h2> Latitude:</h2>{geoLocation.latitude} <h2>Latitude:</h2>{geoLocation.longitude}</span>						 
-								<p>
-									{description.split('\n').map((d, i) => <p key={i}>{d}</p>)}
-								</p>
-							</fieldset>
-						</div>
+					
+	        <div >
+ 						<Card fluid>							
+							<Card.Content>
+				        {/* <Image floated='right' size='big' src='http://semantic-ui.com/images/avatar/large/steve.jpg' /> */}
+								<Image  size='big' src={picture} />
+								<Card.Header>
+									{firstName} {lastName}
+								</Card.Header>
+								<Label as='a' size='large'>
+									<Icon name='user' />
+									{username}
+								</Label>
+								<Label as='a' size='large'>
+									<Icon name='mail' />
+									<b>{email}</b>
+								</Label>
+							</Card.Content>
+							<Card.Description>
+								{description.split('\n').map((d, i) => <p key={i}>{d}</p>)}
+							</Card.Description>
+							<Card.Content>
+				        <Card.Meta>
+				        </Card.Meta>
+								<a><Icon size='large' name='protect' />{roleName}</a>
+								<a><Icon  size='large' name='universal access' />{racis}</a>
+								<a><Icon  size='large' name='marker' />Lat:<b>{geoLocation.latitude}</b> ,
+								Long:<b> {geoLocation.longitude}</b></a>
+				      </Card.Content>
+				      <Card.Content extra>
+				        <div className='ui two buttons'>
+				          <Button basic color='green' onClick={this.onEditUserClick.bind(this)}>Edit User</Button>
+				          <Button basic color='red' onClick={this.onDeletePostClick.bind(this)}>Delete user</Button>
+				        </div>
+				      </Card.Content>
+						</Card>
 	        </div>
         );
     }
 }
+{/* <div className='mycarbody pure-u-1 '>
+	<img src={picture} role='presentation' className=' myimage'></img>
+	<fieldset className='pure-group '>
+		<h1>{firstName} {lastName}</h1>
+		<span><h2>Username:</h2>{username} </span>						 
+		<span><h2>Email</h2>{email} </span>						 
+	</fieldset>
+	<fieldset className='pure-group'>
+		<span><h2>RoleName</h2>{roleName} </span>						 
+		<span><h2>RACIS</h2>{racis}</span>						 
+	</fieldset>
+	<fieldset className='pure-group'>
+		<span><h2> Latitude:</h2>{geoLocation.latitude} <h2>Latitude:</h2>{geoLocation.longitude}</span>						 
+		<p>
+			{description.split('\n').map((d, i) => <p key={i}>{d}</p>)}
+		</p>
+	</fieldset>
+</div> */}

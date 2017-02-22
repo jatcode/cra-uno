@@ -46,11 +46,13 @@ li:hover {
 
 .mycard {
 	display: inline-block;
-  box-shadow: 0 1px 2px 0 rgba(0,0,0,.15);
+  /*box-shadow: 0 1px 2px 0 rgba(0,0,0,.15);*/
   margin: 20px;
   position: relative;
-  margin-bottom: 50px;
+  /*margin-bottom: 50px;*/
   transition: all .2s ease-in-out;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	margin-bottom: 54px;
 }
 
 .mycard:hover {
@@ -156,17 +158,29 @@ https://www.canva.com/color-palette/*/
 	border: 5px solid grey;
 }*/
 
-/*.right{
+.right{
 	flex: 2;
-}*/
+	padding-top: 10px;
+	margin: 20px;
+  /*position: relative;*/
+  margin-bottom: 50px;
+	background: #fff;
 	
-/*.left{
-}*/
+}
+	
+.left{
+	flex: 1;
+	padding-top: 10px;
+	margin: 20px;
+	background: #fff;
+/*border: 10px solid gray;*/
+}
 
-/*.formContainer{
+.formContainer{
 	display: flex;
 	flex-direction: column;
-}*/
+	padding: 5px 5px 5px 5px
+}
 /*.formItem{
 }*/
 /*.breadcrumb{
@@ -178,13 +192,31 @@ https://www.canva.com/color-palette/*/
 }*/
 
 
-/*.mheader{
+
+.mheader{
+	display: flex;
 	color: white;
-	background: #424242;
-	max-height: 40px;
+	/*background: #424242;*/
+	background: #F25F5C;
+	/*max-height: 40px;*/
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	/*color: #404040;*/
+	font-size: 18px;
+	font-weight: 300;
+	line-height: 30px;
+	letter-spacing: .4px;
+}
+.uploader{
+	padding-top: 10px;
+}
 	
-}*/
-	
+.contenedor{
+	display: flex;
+	/*border: 10px solid gray;*/
+	/*background: #50514F;*/
+	/*height: 100vh;*/
+	/*align-items: flex-end;*/
+}
 /*.contenedor{
 	display: flex;
 	border: 10px solid mistyrose;

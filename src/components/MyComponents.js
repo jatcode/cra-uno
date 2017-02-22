@@ -5,6 +5,7 @@ import { Field } from 'redux-form'
 import { startCase, toLower } from 'lodash/string'
 import { withGoogleMap, Marker, GoogleMap } from "react-google-maps";
 import { browserHistory } from 'react-router';
+import { List, Image } from 'semantic-ui-react'
 
 export const MyLink = ({toValue, label}) =>
   <div className='ui compact menu'>
@@ -32,7 +33,7 @@ export function MyInput({input, meta: { touched, error }, ...custom}) {
 
   const hasError = touched && error;
   return (
-      <div className="formContainer">
+      <div className="formContainer pure-control-group">
         <label >{initialCapitalCase(input.name)}</label>
         <input className="formItem" {...input} />
         {/* {hasError && <Message error header='Error' content={error} />} */}
@@ -54,7 +55,7 @@ export function MyTextarea({input, meta: { touched, error }, ...custom}) {
 export function MyMessage(props){
   const { children, message } = props;
   return (
-    <span className='message'>{message}</span>
+    <span className='message pure-form-message-inline'>{message}</span>
   );
 }
 export class MyFileInput extends Component {
@@ -118,12 +119,22 @@ export const SimpleMap= withGoogleMap(props =>(
 export const SingleListItem= (
   {_id, firstName, lastName, description, email, 
     picture, racis='T',username,geoLocation:{longitude,latitude}},i,myFunc)=>
-  <div key={i} className="pure-g" onClick={(e)=>myFunc(e, _id)}>
-    <div className=" mycard pure-u-4-5">
-      <img src={picture}  className='myimage' ></img>
-      <h1>{firstName} {lastName}</h1>
-      <em>{username}</em>
-      <em>{email}</em>
-    </div>
-  </div>
+      <List.Item key={i} onClick={(e)=>myFunc(e, _id)}>
+        <Image avatar src={picture} />
+        <List.Content>
+          <List.Header as='a'>{firstName} {lastName}</List.Header>
+          <List.Description><a><b>{username}</b></a> - <b>{email}</b>  </List.Description>
+        </List.Content>
+      </List.Item>
+      // export const SingleListItem= (
+      //   {_id, firstName, lastName, description, email, 
+      //     picture, racis='T',username,geoLocation:{longitude,latitude}},i,myFunc)=>
+      //   <div key={i} className="pure-g" onClick={(e)=>myFunc(e, _id)}>
+      //     <div className=" mycard pure-u-4-5">
+      //       <img src={picture}  className='myimage' ></img>
+      //       <h1>{firstName} {lastName}</h1>
+      //       <em>{username}</em>
+      //       <em>{email}</em>
+      //     </div>
+      //   </div>
   

@@ -39,7 +39,7 @@ export default class Upload extends Component {
      const imagePreviewUrl = this.props.reload?this.props.input.value:this.state.imagePreviewUrl;
     //  console.log(imagePreviewUrl);
      return(
-       <div>
+       <div className='uploader'>
          <Dropzone multiple={false} onDrop={this.onDrop.bind(this)}>
            <img src={imagePreviewUrl} className="img" role="presentation"/>
            <div className="img"></div>
